@@ -54,8 +54,8 @@ class OllamaProvider:
         temperature: float | None = None,
         seed: int | None = None,
         timeout_s: float = 300.0,
-        retries: int = 2,
-        backoff_s: float = 2.0,
+        retries: int = 4,
+        backoff_s: float = 5.0,
         client: httpx.Client | None = None,
     ) -> None:
         self.model = model
@@ -132,7 +132,8 @@ class OllamaProvider:
                 else:
                     last_error = f"ollama HTTP {resp.status_code}: {resp.text[:300]}"
             if attempt < self.retries:
-                time.sleep(self.backoff_s * (attempt + 1))
+                # Exponential: a shared server that is busy or reloading needs tens of seconds.
+                time.sleep(self.backoff_s * 2**attempt)
         raise ProviderError(f"ollama failed after {self.retries + 1} attempts: {last_error}")
 
 

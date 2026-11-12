@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     llm_provider: ProviderName = Field(default="ollama", alias="LLM_PROVIDER")
     llm_model: str | None = Field(default=None, alias="LLM_MODEL")
     llm_timeout_s: float = Field(default=300.0, gt=0, alias="LLM_TIMEOUT_S")
-    llm_retries: int = Field(default=2, ge=0, le=10, alias="LLM_RETRIES")
+    llm_retries: int = Field(default=4, ge=0, le=10, alias="LLM_RETRIES")
     llm_temperature: float | None = Field(default=None, ge=0, le=2, alias="LLM_TEMPERATURE")
     llm_seed: int | None = Field(default=None, alias="LLM_SEED")
 
