@@ -12,7 +12,7 @@ All notable changes to this project are documented here. The format follows
   to 2 repairs per story (`--max-repairs`).
 - Story parsers for Markdown user stories (`## title` + acceptance-criteria bullets) and Gherkin
   (`Scenario`, `Background`, `Scenario Outline` with `Examples`).
-- Page catalog of saucedemo.com captured with Playwright across 13 page states (92 `data-test`
+- Page catalog of saucedemo.com captured with Playwright across 15 page states (99 `data-test`
   ids, error messages, select options, repeated-element texts) and committed to the repo;
   `ltg catalog capture` re-captures it and an e2e test fails when the live site drifts.
 - Static validation before any browser run: code extraction, syntax, test name and `page`
