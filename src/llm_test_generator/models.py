@@ -108,6 +108,9 @@ class ValidationReport(BaseModel):
 
     code: str
     issues: list[Issue] = Field(default_factory=list)
+    unknown_ids: list[str] = Field(
+        default_factory=list, description="Test ids used by the code that the catalog lacks."
+    )
 
     @property
     def ok(self) -> bool:
