@@ -109,7 +109,7 @@ def _snapshot(page: Any, name: str, state: str, attr: str) -> Page:
 
 
 def _saucedemo_tour(page: Any, snap: Callable[[str, str, str], None]) -> None:  # pragma: no cover
-    """Visit every reachable state. Exercised by ``tests/e2e/test_capture_live.py``."""
+    """Visit every reachable state. Exercised by ``tests/e2e/test_live_site.py``."""
     page.goto("/")
     snap("login", "logged out", "login-button")
     page.get_by_test_id("login-button").click()
@@ -135,16 +135,34 @@ def _saucedemo_tour(page: Any, snap: Callable[[str, str, str], None]) -> None:  
     snap("menu", "inventory with the burger menu open", "logout-sidebar-link")
     page.get_by_role("button", name="Close Menu").click()
 
-    page.get_by_test_id("add-to-cart-sauce-labs-backpack").click()
-    snap("inventory_with_cart", "after adding the backpack", "shopping-cart-badge")
-
-    page.get_by_test_id("inventory-item-name").first.click()
-    page.wait_for_url("**/inventory-item.html*")
-    snap("inventory_item", "detail page opened from the first product name", "back-to-products")
+    # Add every product so each per-product remove-<slug> id is captured too.
+    add_buttons = page.locator('[data-test^="add-to-cart-"]')
+    while add_buttons.count():
+        add_buttons.first.click()
+    snap("inventory_full_cart", "after adding all six products", "shopping-cart-badge")
 
     page.get_by_test_id("shopping-cart-link").click()
     page.wait_for_url("**/cart.html")
-    snap("cart", "cart with the backpack", "checkout")
+    snap("cart_full", "cart with all six products", "checkout")
+
+    # Keep only the backpack for the item-detail and checkout states.
+    others = page.locator('[data-test^="remove-"]:not([data-test="remove-sauce-labs-backpack"])')
+    while others.count():
+        others.first.click()
+    page.get_by_test_id("continue-shopping").click()
+    page.wait_for_url("**/inventory.html")
+
+    page.get_by_test_id("inventory-item-name").filter(has_text="Sauce Labs Bike Light").click()
+    page.wait_for_url("**/inventory-item.html*")
+    snap("inventory_item", "detail page of a product that is not in the cart", "back-to-products")
+    page.get_by_test_id("back-to-products").click()
+    page.get_by_test_id("inventory-item-name").filter(has_text="Sauce Labs Backpack").click()
+    page.wait_for_url("**/inventory-item.html*")
+    snap("inventory_item_in_cart", "detail page of the backpack, which is in the cart", "remove")
+
+    page.get_by_test_id("shopping-cart-link").click()
+    page.wait_for_url("**/cart.html")
+    snap("cart", "cart with the backpack only", "checkout")
 
     page.get_by_test_id("checkout").click()
     page.wait_for_url("**/checkout-step-one.html")

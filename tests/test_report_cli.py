@@ -66,7 +66,7 @@ def test_cli_stories_and_catalog_show() -> None:
     assert "sorting-by-price-from-low-to-high" in result.output
     shown = runner.invoke(app, ["catalog", "show"])
     assert shown.exit_code == 0
-    assert "13 page states" in shown.output
+    assert "15 page states" in shown.output
 
 
 def test_cli_version_and_bad_input(tmp_path: Path) -> None:
