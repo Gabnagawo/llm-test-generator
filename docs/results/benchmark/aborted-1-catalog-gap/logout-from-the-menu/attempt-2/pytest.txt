@@ -1,0 +1,37 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________________ test_logout_from_the_menu[chromium] _____________________
+
+page = <Page url='https://www.saucedemo.com/'>
+
+    def test_logout_from_the_menu(page: Page) -> None:
+        page.goto("/")
+        page.get_by_test_id("username").fill("standard_user")
+        page.get_by_test_id("password").fill("secret_sauce")
+        page.get_by_test_id("login-button").click()
+        expect(page).to_have_url(re.compile(r".*/inventory\.html$"))
+    
+        page.get_by_role("button", name="Open Menu").click()
+        page.get_by_test_id("logout-sidebar-link").click()
+>       expect(page).to_have_url(re.compile(r".*/login\.html$"))
+E       AssertionError: Page URL expected to be 're.compile('.*/login\\.html$')'
+E       Actual value: https://www.saucedemo.com/ 
+E       Call log:
+E         - Expect "to_have_url" with timeout 5000ms
+E           14 × locator resolved to <html lang="en">…</html>
+E              - unexpected value "https://www.saucedemo.com/"
+E       
+E       Aria snapshot:
+E       - text: Swag Labs
+E       - main:
+E         - form "Login":
+E           - textbox "Username"
+E           - textbox "Password"
+E           - button "Login"
+E         - heading "Accepted usernames are:" [level=4]
+E         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user
+E         - heading "Password for all users:" [level=4]
+E         - text: secret_sauce
+
+logout-from-the-menu\attempt-2\test_logout_from_the_menu.py:15: AssertionError
+1 failed in 7.40s

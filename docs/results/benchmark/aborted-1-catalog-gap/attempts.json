@@ -1,0 +1,604 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "run_id": "qwen3-8b-think-off",
+    "mode": "run",
+    "started_at": "2026-11-12T20:55:28.568482Z",
+    "finished_at": null,
+    "provider": "ollama",
+    "model": "qwen3:8b",
+    "options": {
+      "host": "http://localhost:11434",
+      "num_ctx": 16384,
+      "think": false,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "seed": 42
+    },
+    "base_url": "https://www.saucedemo.com",
+    "max_repairs": 2,
+    "prompt_version": "2026-11-12.1",
+    "catalog_sha256": "9c83a723bb2fa2546321a85c4a103922923670e39d4245b8324011c118bec19b",
+    "versions": {
+      "python": "3.12.10",
+      "llm-test-generator": "0.1.0",
+      "playwright": "1.65.1",
+      "pytest-playwright": "0.10.0",
+      "pytest": "9.2.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "results": [
+    {
+      "story": {
+        "id": "successful-login",
+        "title": "Successful login",
+        "narrative": "As a registered shopper, I want to log in with my username and password so that I can browse the products.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"secret_sauce\"",
+          "Then I am taken to the inventory page (URL ends with /inventory.html)",
+          "And the page title reads \"Products\"",
+          "And exactly 6 products are listed"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "smoke",
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:55:28.641667Z",
+          "llm": {
+            "latency_s": 14.996,
+            "prompt_tokens": 3816,
+            "completion_tokens": 123,
+            "retries": 0,
+            "prompt_chars": 15001,
+            "response_chars": 498
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.39,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.52s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "successful-login/attempt-1/prompt.md",
+            "response": "successful-login/attempt-1/response.md",
+            "code": "successful-login/attempt-1/test_successful_login.py",
+            "pytest": "successful-login/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "successful-login/attempt-1/test_successful_login.py",
+      "duration_s": 17.5
+    },
+    {
+      "story": {
+        "id": "locked-out-user-is-rejected",
+        "title": "Locked-out user is rejected",
+        "narrative": "As the shop owner, I want locked accounts to be refused so that blocked users cannot place orders.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"locked_out_user\" with password \"secret_sauce\"",
+          "Then I stay on the login page",
+          "And an error message says \"Epic sadface: Sorry, this user has been locked out.\""
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:55:46.141398Z",
+          "llm": {
+            "latency_s": 12.843,
+            "prompt_tokens": 3817,
+            "completion_tokens": 120,
+            "retries": 0,
+            "prompt_chars": 14985,
+            "response_chars": 472
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.25,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.36s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "locked-out-user-is-rejected/attempt-1/prompt.md",
+            "response": "locked-out-user-is-rejected/attempt-1/response.md",
+            "code": "locked-out-user-is-rejected/attempt-1/test_locked_out_user_is_rejected.py",
+            "pytest": "locked-out-user-is-rejected/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "locked-out-user-is-rejected/attempt-1/test_locked_out_user_is_rejected.py",
+      "duration_s": 15.22
+    },
+    {
+      "story": {
+        "id": "wrong-password-is-rejected",
+        "title": "Wrong password is rejected",
+        "narrative": "As a shopper, I want a clear message when my credentials are wrong so that I know to retry.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"not_the_password\"",
+          "Then an error message says \"Epic sadface: Username and password do not match any user in this service\"",
+          "And the username and password fields are still visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:56:01.357066Z",
+          "llm": {
+            "latency_s": 15.544,
+            "prompt_tokens": 3819,
+            "completion_tokens": 149,
+            "retries": 0,
+            "prompt_chars": 15026,
+            "response_chars": 615
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.24,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.38s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "wrong-password-is-rejected/attempt-1/prompt.md",
+            "response": "wrong-password-is-rejected/attempt-1/response.md",
+            "code": "wrong-password-is-rejected/attempt-1/test_wrong_password_is_rejected.py",
+            "pytest": "wrong-password-is-rejected/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "wrong-password-is-rejected/attempt-1/test_wrong_password_is_rejected.py",
+      "duration_s": 17.9
+    },
+    {
+      "story": {
+        "id": "logout-from-the-menu",
+        "title": "Logout from the menu",
+        "narrative": "As a logged-in shopper, I want to log out so that the next person on this computer cannot use my session.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\"",
+          "When I open the menu and choose \"Logout\"",
+          "Then I am back on the login page",
+          "And the login button is visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:56:19.256010Z",
+          "llm": {
+            "latency_s": 15.771,
+            "prompt_tokens": 3800,
+            "completion_tokens": 153,
+            "retries": 0,
+            "prompt_chars": 14921,
+            "response_chars": 611
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.36,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:15): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-1\\test_logout_from_the_menu.py:15: AssertionError\n1 failed in 7.50s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-1/prompt.md",
+            "response": "logout-from-the-menu/attempt-1/response.md",
+            "code": "logout-from-the-menu/attempt-1/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T20:56:43.525970Z",
+          "llm": {
+            "latency_s": 22.278,
+            "prompt_tokens": 4230,
+            "completion_tokens": 153,
+            "retries": 0,
+            "prompt_chars": 16622,
+            "response_chars": 611
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.24,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:15): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-2\\test_logout_from_the_menu.py:15: AssertionError\n1 failed in 7.40s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-2/prompt.md",
+            "response": "logout-from-the-menu/attempt-2/response.md",
+            "code": "logout-from-the-menu/attempt-2/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T20:57:14.155246Z",
+          "llm": {
+            "latency_s": 22.714,
+            "prompt_tokens": 4660,
+            "completion_tokens": 153,
+            "retries": 0,
+            "prompt_chars": 18323,
+            "response_chars": 611
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.32,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:15): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-3\\test_logout_from_the_menu.py:15: AssertionError\n1 failed in 7.51s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-3/prompt.md",
+            "response": "logout-from-the-menu/attempt-3/response.md",
+            "code": "logout-from-the-menu/attempt-3/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 86.04
+    },
+    {
+      "story": {
+        "id": "adding-a-product-updates-the-cart-badge",
+        "title": "Adding a product updates the cart badge",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" to the cart from the inventory page",
+          "Then the cart badge shows \"1\"",
+          "And the backpack's button now reads \"Remove\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart",
+          "smoke"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:57:45.296542Z",
+          "llm": {
+            "latency_s": 18.62,
+            "prompt_tokens": 3820,
+            "completion_tokens": 158,
+            "retries": 0,
+            "prompt_chars": 15014,
+            "response_chars": 618
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 7.36,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have text 'Remove'",
+            "failure_detail": "Failing line (test_adding_a_product_updates_the_cart_badge.py:14): expect(page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\")).to_have_text(\"Remove\")\nAssertionError: Locator expected to have text 'Remove'\nActual value: None\nError: element(s) not found\nCall log:\n- Expect \"to_have_text\" get_by_test_id(\"add-to-cart-sauce-labs-backpack\") with timeout 5000ms\n- waiting for get_by_test_id(\"add-to-cart-sauce-labs-backpack\")\n\nAria snapshot:\n- banner:\n- button \"Open Menu\"\n- img \"Open Menu\"\n- text: Swag Labs\n- button \"Cart, 1 items\": \"1\"\n- text: Products Name (A to Z)\n- combobox \"Sort products\":\n- option \"Name (A to Z)\" [selected]\n- option \"Name (Z to A)\"\n- option \"Price (low to high)\"\n- option \"Price (high to low)\"\n- main:\n- button \"View details for Sauce Labs Backpack\":\n- img \"Sauce Labs Backpack\"\n- button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\n- text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\n- button \"Remove\"\n- button \"View details for Sauce Labs Bike Light\":\n- img \"Sauce Labs Bike Light\"\n- button \"View details for Sauce Labs Bike Light\": Sauce Labs Bike Light\n- text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99\n- button \"Add to cart\"\n- button \"View details for Sauce Labs Bolt T-Shirt\":\n- img \"Sauce Labs Bolt T-Shirt\"\n- button \"View details for Sauce Labs Bolt T-Shirt\": Sauce Labs Bolt T-Shirt\n- text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99\n- button \"Add to cart\"\n- button \"View details for Sauce Labs Fleece Jacket\":\n- img \"Sauce Labs Fleece Jacket\"\n- button \"View details for Sauce Labs Fleece Jacket\": Sauce Labs Fleece Jacket\n- text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99\n- button \"Add to cart\"",
+            "output_tail": "art-sauce-labs-backpack\").click()\n        expect(page.get_by_test_id(\"shopping-cart-badge\")).to_have_text(\"1\")\n>       expect(page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\")).to_have_text(\"Remove\")\nE       AssertionError: Locator expected to have text 'Remove'\nE       Actual value: None\nE       Error: element(s) not found \nE       Call log:\nE         - Expect \"to_have_text\" get_by_test_id(\"add-to-cart-sauce-labs-backpack\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"add-to-cart-sauce-labs-backpack\")\nE       \nE       Aria snapshot:\nE       - banner:\nE         - button \"Open Menu\"\nE         - img \"Open Menu\"\nE         - text: Swag Labs\nE         - button \"Cart, 1 items\": \"1\"\nE         - text: Products Name (A to Z)\nE         - combobox \"Sort products\":\nE           - option \"Name (A to Z)\" [selected]\nE           - option \"Name (Z to A)\"\nE           - option \"Price (low to high)\"\nE           - option \"Price (high to low)\"\nE       - main:\nE         - button \"View details for Sauce Labs Backpack\":\nE           - img \"Sauce Labs Backpack\"\nE         - button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\nE         - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\nE         - button \"Remove\"\nE         - button \"View details for Sauce Labs Bike Light\":\nE           - img \"Sauce Labs Bike Light\"\nE         - button \"View details for Sauce Labs Bike Light\": Sauce Labs Bike Light\nE         - text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Bolt T-Shirt\":\nE           - img \"Sauce Labs Bolt T-Shirt\"\nE         - button \"View details for Sauce Labs Bolt T-Shirt\": Sauce Labs Bolt T-Shirt\nE         - text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Fleece Jacket\":\nE           - img \"Sauce Labs Fleece Jacket\"\nE         - button \"View details for Sauce Labs Fleece Jacket\": Sauce Labs Fleece Jacket\nE         - text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Onesie\":\nE           - img \"Sauce Labs Onesie\"\nE         - button \"View details for Sauce Labs Onesie\": Sauce Labs Onesie\nE         - text: Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel. $7.99\nE         - button \"Add to cart\"\nE         - button \"View details for Test.allTheThings() T-Shirt (Red)\":\nE           - img \"Test.allTheThings() T-Shirt (Red)\"\nE         - button \"View details for Test.allTheThings() T-Shirt (Red)\": Test.allTheThings() T-Shirt (Red)\nE         - text: This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton. $15.99\nE         - button \"Add to cart\"\nE       - contentinfo:\nE         - list:\nE           - listitem:\nE             - link \"X\":\nE               - /url: https://x.com/saucelabs\nE           - listitem:\nE             - link \"Facebook\":\nE               - /url: https://www.facebook.com/saucelabs\nE           - listitem:\nE             - link \"LinkedIn\":\nE               - /url: https://www.linkedin.com/company/sauce-labs/\nE         - text: © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy\n\nadding-a-product-updates-the-cart-badge\\attempt-1\\test_adding_a_product_updates_the_cart_badge.py:14: AssertionError\n1 failed in 6.51s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have text 'Remove'",
+          "artifacts": {
+            "prompt": "adding-a-product-updates-the-cart-badge/attempt-1/prompt.md",
+            "response": "adding-a-product-updates-the-cart-badge/attempt-1/response.md",
+            "code": "adding-a-product-updates-the-cart-badge/attempt-1/test_adding_a_product_updates_the_cart_badge.py",
+            "pytest": "adding-a-product-updates-the-cart-badge/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T20:58:11.387139Z",
+          "llm": {
+            "latency_s": 27.577,
+            "prompt_tokens": 4625,
+            "completion_tokens": 158,
+            "retries": 0,
+            "prompt_chars": 18130,
+            "response_chars": 618
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 7.48,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have text 'Remove'",
+            "failure_detail": "Failing line (test_adding_a_product_updates_the_cart_badge.py:14): expect(page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\")).to_have_text(\"Remove\")\nAssertionError: Locator expected to have text 'Remove'\nActual value: None\nError: element(s) not found\nCall log:\n- Expect \"to_have_text\" get_by_test_id(\"add-to-cart-sauce-labs-backpack\") with timeout 5000ms\n- waiting for get_by_test_id(\"add-to-cart-sauce-labs-backpack\")\n\nAria snapshot:\n- banner:\n- button \"Open Menu\"\n- img \"Open Menu\"\n- text: Swag Labs\n- button \"Cart, 1 items\": \"1\"\n- text: Products Name (A to Z)\n- combobox \"Sort products\":\n- option \"Name (A to Z)\" [selected]\n- option \"Name (Z to A)\"\n- option \"Price (low to high)\"\n- option \"Price (high to low)\"\n- main:\n- button \"View details for Sauce Labs Backpack\":\n- img \"Sauce Labs Backpack\"\n- button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\n- text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\n- button \"Remove\"\n- button \"View details for Sauce Labs Bike Light\":\n- img \"Sauce Labs Bike Light\"\n- button \"View details for Sauce Labs Bike Light\": Sauce Labs Bike Light\n- text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99\n- button \"Add to cart\"\n- button \"View details for Sauce Labs Bolt T-Shirt\":\n- img \"Sauce Labs Bolt T-Shirt\"\n- button \"View details for Sauce Labs Bolt T-Shirt\": Sauce Labs Bolt T-Shirt\n- text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99\n- button \"Add to cart\"\n- button \"View details for Sauce Labs Fleece Jacket\":\n- img \"Sauce Labs Fleece Jacket\"\n- button \"View details for Sauce Labs Fleece Jacket\": Sauce Labs Fleece Jacket\n- text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99\n- button \"Add to cart\"",
+            "output_tail": "art-sauce-labs-backpack\").click()\n        expect(page.get_by_test_id(\"shopping-cart-badge\")).to_have_text(\"1\")\n>       expect(page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\")).to_have_text(\"Remove\")\nE       AssertionError: Locator expected to have text 'Remove'\nE       Actual value: None\nE       Error: element(s) not found \nE       Call log:\nE         - Expect \"to_have_text\" get_by_test_id(\"add-to-cart-sauce-labs-backpack\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"add-to-cart-sauce-labs-backpack\")\nE       \nE       Aria snapshot:\nE       - banner:\nE         - button \"Open Menu\"\nE         - img \"Open Menu\"\nE         - text: Swag Labs\nE         - button \"Cart, 1 items\": \"1\"\nE         - text: Products Name (A to Z)\nE         - combobox \"Sort products\":\nE           - option \"Name (A to Z)\" [selected]\nE           - option \"Name (Z to A)\"\nE           - option \"Price (low to high)\"\nE           - option \"Price (high to low)\"\nE       - main:\nE         - button \"View details for Sauce Labs Backpack\":\nE           - img \"Sauce Labs Backpack\"\nE         - button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\nE         - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\nE         - button \"Remove\"\nE         - button \"View details for Sauce Labs Bike Light\":\nE           - img \"Sauce Labs Bike Light\"\nE         - button \"View details for Sauce Labs Bike Light\": Sauce Labs Bike Light\nE         - text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Bolt T-Shirt\":\nE           - img \"Sauce Labs Bolt T-Shirt\"\nE         - button \"View details for Sauce Labs Bolt T-Shirt\": Sauce Labs Bolt T-Shirt\nE         - text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Fleece Jacket\":\nE           - img \"Sauce Labs Fleece Jacket\"\nE         - button \"View details for Sauce Labs Fleece Jacket\": Sauce Labs Fleece Jacket\nE         - text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99\nE         - button \"Add to cart\"\nE         - button \"View details for Sauce Labs Onesie\":\nE           - img \"Sauce Labs Onesie\"\nE         - button \"View details for Sauce Labs Onesie\": Sauce Labs Onesie\nE         - text: Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel. $7.99\nE         - button \"Add to cart\"\nE         - button \"View details for Test.allTheThings() T-Shirt (Red)\":\nE           - img \"Test.allTheThings() T-Shirt (Red)\"\nE         - button \"View details for Test.allTheThings() T-Shirt (Red)\": Test.allTheThings() T-Shirt (Red)\nE         - text: This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton. $15.99\nE         - button \"Add to cart\"\nE       - contentinfo:\nE         - list:\nE           - listitem:\nE             - link \"X\":\nE               - /url: https://x.com/saucelabs\nE           - listitem:\nE             - link \"Facebook\":\nE               - /url: https://www.facebook.com/saucelabs\nE           - listitem:\nE             - link \"LinkedIn\":\nE               - /url: https://www.linkedin.com/company/sauce-labs/\nE         - text: © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy\n\nadding-a-product-updates-the-cart-badge\\attempt-2\\test_adding_a_product_updates_the_cart_badge.py:14: AssertionError\n1 failed in 6.60s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have text 'Remove'",
+          "artifacts": {
+            "prompt": "adding-a-product-updates-the-cart-badge/attempt-2/prompt.md",
+            "response": "adding-a-product-updates-the-cart-badge/attempt-2/response.md",
+            "code": "adding-a-product-updates-the-cart-badge/attempt-2/test_adding_a_product_updates_the_cart_badge.py",
+            "pytest": "adding-a-product-updates-the-cart-badge/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T20:58:46.558833Z",
+          "llm": {
+            "latency_s": 28.599,
+            "prompt_tokens": 5430,
+            "completion_tokens": 156,
+            "retries": 0,
+            "prompt_chars": 21246,
+            "response_chars": 613
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.24,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.45s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "adding-a-product-updates-the-cart-badge/attempt-3/prompt.md",
+            "response": "adding-a-product-updates-the-cart-badge/attempt-3/response.md",
+            "code": "adding-a-product-updates-the-cart-badge/attempt-3/test_adding_a_product_updates_the_cart_badge.py",
+            "pytest": "adding-a-product-updates-the-cart-badge/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_after_repair",
+      "final_test": "adding-a-product-updates-the-cart-badge/attempt-3/test_adding_a_product_updates_the_cart_badge.py",
+      "duration_s": 92.21
+    },
+    {
+      "story": {
+        "id": "removing-a-product-from-the-cart-page-empties-the-cart",
+        "title": "Removing a product from the cart page empties the cart",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "Given I have added \"Sauce Labs Bike Light\" to the cart",
+          "When I open the cart",
+          "And I remove \"Sauce Labs Bike Light\"",
+          "Then the cart contains no items",
+          "And the cart badge is not displayed"
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T20:59:17.511409Z",
+          "llm": {
+            "latency_s": 23.081,
+            "prompt_tokens": 3840,
+            "completion_tokens": 224,
+            "retries": 0,
+            "prompt_chars": 15085,
+            "response_chars": 875
+          },
+          "issues": [
+            {
+              "rule": "unknown-test-id",
+              "message": "test id 'remove-sauce-labs-bike-light' does not exist in the page catalog",
+              "category": "unknown_selector",
+              "line": 19
+            }
+          ],
+          "execution": null,
+          "outcome": "static_failed",
+          "failure_category": "unknown_selector",
+          "failure_message": "[unknown-test-id] line 19: test id 'remove-sauce-labs-bike-light' does not exist in the page catalog",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/prompt.md",
+            "response": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/response.md",
+            "code": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/test_removing_a_product_from_the_cart_page_empties_the_cart.py"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T20:59:40.600058Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-2/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 62.72
+    },
+    {
+      "story": {
+        "id": "the-cart-lists-every-product-that-was-added",
+        "title": "The cart lists every product that was added",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\" to the cart",
+          "And I open the cart",
+          "Then the cart lists exactly 2 items",
+          "And the cart shows \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:00:20.237843Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "the-cart-lists-every-product-that-was-added/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 37.57
+    },
+    {
+      "story": {
+        "id": "sorting-by-price-from-low-to-high",
+        "title": "Sorting by price from low to high",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I sort the products by \"Price (low to high)\"",
+          "Then the first product price is \"$7.99\"",
+          "And the last product price is \"$49.99\""
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:00:57.805410Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "sorting-by-price-from-low-to-high/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 41.53
+    }
+  ]
+}

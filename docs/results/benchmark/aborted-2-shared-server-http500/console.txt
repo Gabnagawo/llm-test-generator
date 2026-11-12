@@ -1,0 +1,19 @@
+llm-test-generator 0.1.0: 12 stories, ollama qwen3:8b, mode=run, max repairs=2, target https://www.saucedemo.com
+run folder: runs/qwen3-8b-think-off
+[ 1/12] successful-login  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 2/12] locked-out-user-is-rejected  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 3/12] wrong-password-is-rejected  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 4/12] logout-from-the-menu  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 5/12] adding-a-product-updates-the-cart-badge  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 6/12] removing-a-product-from-the-cart-page-empties-the-cart  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 7/12] the-cart-lists-every-product-that-was-added  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 8/12] sorting-by-price-from-low-to-high  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[ 9/12] sorting-by-name-from-z-to-a  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[10/12] opening-a-product-detail-page  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[11/12] complete-a-purchase  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+[12/12] checkout-requires-a-first-name  #1 generate provider_error provider_error: ollama failed after 3 attempts: ollama HTTP 500: {"error":"prediction aborted, token repeat limit reached"}  (no LLM answer)
+
+valid on 1st attempt: 0/12 (0 %); after repair 1: 0/12 (0 %); after repair 2: 0/12 (0 %)
+LLM calls: 0, median latency None s, wall time 8.1 min
+passing tests: runs/qwen3-8b-think-off/passing/
+attempt log:   runs/qwen3-8b-think-off/attempts.json

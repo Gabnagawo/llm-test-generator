@@ -1,0 +1,33 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________________ test_opening_a_product_detail_page[chromium] _________________
+
+page = <Page url='https://www.saucedemo.com/inventory-item.html?id=0'>
+
+    def test_opening_a_product_detail_page(page: Page) -> None:
+        page.goto("/")
+        page.get_by_test_id("username").fill("standard_user")
+        page.get_by_test_id("password").fill("secret_sauce")
+        page.get_by_test_id("login-button").click()
+        expect(page).to_have_url(re.compile(r".*/inventory\.html$"))
+    
+        page.get_by_test_id("item-0-title-link").click()
+        expect(page).to_have_url(re.compile(r".*/inventory-item\.html\?id=0$"))
+    
+>       expect(page.get_by_test_id("inventory-item-name")).to_have_text("Sauce Labs Bike Light")
+E       AssertionError: Locator expected to have text 'Sauce Labs Bike Light'
+E       Actual value: None
+E       Error: strict mode violation: get_by_test_id("inventory-item-name") resolved to 6 elements:
+E           1) <div class="inventory_item_name " data-test="inventory-item-name">Sauce Labs Backpack</div> aka get_by_test_id("item-4-title-link")
+E           2) <div class="inventory_item_name " data-test="inventory-item-name">Sauce Labs Bike Light</div> aka get_by_test_id("item-0-title-link")
+E           3) <div class="inventory_item_name " data-test="inventory-item-name">Sauce Labs Bolt T-Shirt</div> aka get_by_test_id("item-1-title-link")
+E           4) <div class="inventory_item_name " data-test="inventory-item-name">Sauce Labs Fleece Jacket</div> aka get_by_test_id("item-5-title-link")
+E           5) <div class="inventory_item_name " data-test="inventory-item-name">Sauce Labs Onesie</div> aka get_by_test_id("item-2-title-link")
+E           6) <div class="inventory_item_name " data-test="inventory-item-name">Test.allTheThings() T-Shirt (Red)</div> aka get_by_test_id("item-3-title-link")
+E        
+E       Call log:
+E         - Expect "to_have_text" get_by_test_id("inventory-item-name") with timeout 5000ms
+E         - waiting for get_by_test_id("inventory-item-name")
+
+opening-a-product-detail-page\attempt-1\test_opening_a_product_detail_page.py:16: AssertionError
+1 failed in 1.92s

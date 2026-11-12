@@ -1,0 +1,1007 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "run_id": "qwen3-8b-think-off",
+    "mode": "run",
+    "started_at": "2026-11-12T22:34:56.043016Z",
+    "finished_at": "2026-11-12T22:46:59.646021Z",
+    "provider": "ollama",
+    "model": "qwen3:8b",
+    "options": {
+      "host": "http://localhost:11434",
+      "num_ctx": 16384,
+      "think": false,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "seed": 42
+    },
+    "base_url": "https://www.saucedemo.com",
+    "max_repairs": 2,
+    "prompt_version": "2026-11-12.1",
+    "catalog_sha256": "f9e45271cc786af74f0ada3e804f24d193b4f526f1ef9e1f84f2f589ec40abd5",
+    "versions": {
+      "python": "3.12.10",
+      "llm-test-generator": "0.1.0",
+      "playwright": "1.65.1",
+      "pytest-playwright": "0.10.0",
+      "pytest": "9.2.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "results": [
+    {
+      "story": {
+        "id": "successful-login",
+        "title": "Successful login",
+        "narrative": "As a registered shopper, I want to log in with my username and password so that I can browse the products.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"secret_sauce\"",
+          "Then I am taken to the inventory page (URL ends with /inventory.html)",
+          "And the page title reads \"Products\"",
+          "And exactly 6 products are listed"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "smoke",
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:34:56.137125Z",
+          "llm": {
+            "latency_s": 17.666,
+            "prompt_tokens": 4323,
+            "completion_tokens": 123,
+            "retries": 0,
+            "prompt_chars": 17001,
+            "response_chars": 498
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 9.58,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 8.45s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "successful-login/attempt-1/prompt.md",
+            "response": "successful-login/attempt-1/response.md",
+            "code": "successful-login/attempt-1/test_successful_login.py",
+            "pytest": "successful-login/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "successful-login/attempt-1/test_successful_login.py",
+      "duration_s": 27.42
+    },
+    {
+      "story": {
+        "id": "locked-out-user-is-rejected",
+        "title": "Locked-out user is rejected",
+        "narrative": "As the shop owner, I want locked accounts to be refused so that blocked users cannot place orders.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"locked_out_user\" with password \"secret_sauce\"",
+          "Then I stay on the login page",
+          "And an error message says \"Epic sadface: Sorry, this user has been locked out.\""
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:35:23.557778Z",
+          "llm": {
+            "latency_s": 19.233,
+            "prompt_tokens": 4324,
+            "completion_tokens": 120,
+            "retries": 0,
+            "prompt_chars": 16985,
+            "response_chars": 472
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.98,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.82s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "locked-out-user-is-rejected/attempt-1/prompt.md",
+            "response": "locked-out-user-is-rejected/attempt-1/response.md",
+            "code": "locked-out-user-is-rejected/attempt-1/test_locked_out_user_is_rejected.py",
+            "pytest": "locked-out-user-is-rejected/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "locked-out-user-is-rejected/attempt-1/test_locked_out_user_is_rejected.py",
+      "duration_s": 22.36
+    },
+    {
+      "story": {
+        "id": "wrong-password-is-rejected",
+        "title": "Wrong password is rejected",
+        "narrative": "As a shopper, I want a clear message when my credentials are wrong so that I know to retry.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"not_the_password\"",
+          "Then an error message says \"Epic sadface: Username and password do not match any user in this service\"",
+          "And the username and password fields are still visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:35:45.921986Z",
+          "llm": {
+            "latency_s": 20.594,
+            "prompt_tokens": 4326,
+            "completion_tokens": 149,
+            "retries": 0,
+            "prompt_chars": 17026,
+            "response_chars": 615
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.91,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.72s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "wrong-password-is-rejected/attempt-1/prompt.md",
+            "response": "wrong-password-is-rejected/attempt-1/response.md",
+            "code": "wrong-password-is-rejected/attempt-1/test_wrong_password_is_rejected.py",
+            "pytest": "wrong-password-is-rejected/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "wrong-password-is-rejected/attempt-1/test_wrong_password_is_rejected.py",
+      "duration_s": 23.67
+    },
+    {
+      "story": {
+        "id": "logout-from-the-menu",
+        "title": "Logout from the menu",
+        "narrative": "As a logged-in shopper, I want to log out so that the next person on this computer cannot use my session.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\"",
+          "When I open the menu and choose \"Logout\"",
+          "Then I am back on the login page",
+          "And the login button is visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:36:09.590163Z",
+          "llm": {
+            "latency_s": 21.018,
+            "prompt_tokens": 4307,
+            "completion_tokens": 152,
+            "retries": 0,
+            "prompt_chars": 16921,
+            "response_chars": 606
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 9.01,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:14): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-1\\test_logout_from_the_menu.py:14: AssertionError\n1 failed in 7.81s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-1/prompt.md",
+            "response": "logout-from-the-menu/attempt-1/response.md",
+            "code": "logout-from-the-menu/attempt-1/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:36:39.815479Z",
+          "llm": {
+            "latency_s": 27.146,
+            "prompt_tokens": 4736,
+            "completion_tokens": 152,
+            "retries": 0,
+            "prompt_chars": 18617,
+            "response_chars": 606
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 9.1,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:14): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-2\\test_logout_from_the_menu.py:14: AssertionError\n1 failed in 7.99s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-2/prompt.md",
+            "response": "logout-from-the-menu/attempt-2/response.md",
+            "code": "logout-from-the-menu/attempt-2/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:37:16.209313Z",
+          "llm": {
+            "latency_s": 27.875,
+            "prompt_tokens": 5165,
+            "completion_tokens": 152,
+            "retries": 0,
+            "prompt_chars": 20313,
+            "response_chars": 606
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 9.74,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+            "failure_detail": "Failing line (test_logout_from_the_menu.py:14): expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nAssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nActual value: https://www.saucedemo.com/\nCall log:\n- Expect \"to_have_url\" with timeout 5000ms\n14 × locator resolved to <html lang=\"en\">…</html>\n- unexpected value \"https://www.saucedemo.com/\"\n\nAria snapshot:\n- text: Swag Labs\n- main:\n- form \"Login\":\n- textbox \"Username\"\n- textbox \"Password\"\n- button \"Login\"\n- heading \"Accepted usernames are:\" [level=4]\n- text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\n- heading \"Password for all users:\" [level=4]\n- text: secret_sauce",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________ test_logout_from_the_menu[chromium] _____________________\n\npage = <Page url='https://www.saucedemo.com/'>\n\n    def test_logout_from_the_menu(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n        page.get_by_role(\"button\", name=\"Open Menu\").click()\n        page.get_by_test_id(\"logout-sidebar-link\").click()\n>       expect(page).to_have_url(re.compile(r\".*/login\\.html$\"))\nE       AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'\nE       Actual value: https://www.saucedemo.com/ \nE       Call log:\nE         - Expect \"to_have_url\" with timeout 5000ms\nE           14 × locator resolved to <html lang=\"en\">…</html>\nE              - unexpected value \"https://www.saucedemo.com/\"\nE       \nE       Aria snapshot:\nE       - text: Swag Labs\nE       - main:\nE         - form \"Login\":\nE           - textbox \"Username\"\nE           - textbox \"Password\"\nE           - button \"Login\"\nE         - heading \"Accepted usernames are:\" [level=4]\nE         - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user\nE         - heading \"Password for all users:\" [level=4]\nE         - text: secret_sauce\n\nlogout-from-the-menu\\attempt-3\\test_logout_from_the_menu.py:14: AssertionError\n1 failed in 8.66s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Page URL expected to be 're.compile('.*/login\\\\.html$')'",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-3/prompt.md",
+            "response": "logout-from-the-menu/attempt-3/response.md",
+            "code": "logout-from-the-menu/attempt-3/test_logout_from_the_menu.py",
+            "pytest": "logout-from-the-menu/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 104.39
+    },
+    {
+      "story": {
+        "id": "adding-a-product-updates-the-cart-badge",
+        "title": "Adding a product updates the cart badge",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" to the cart from the inventory page",
+          "Then the cart badge shows \"1\"",
+          "And the backpack's button now reads \"Remove\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart",
+          "smoke"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:37:53.979738Z",
+          "llm": {
+            "latency_s": 26.139,
+            "prompt_tokens": 4327,
+            "completion_tokens": 179,
+            "retries": 0,
+            "prompt_chars": 17014,
+            "response_chars": 703
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 3.25,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 2.06s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "adding-a-product-updates-the-cart-badge/attempt-1/prompt.md",
+            "response": "adding-a-product-updates-the-cart-badge/attempt-1/response.md",
+            "code": "adding-a-product-updates-the-cart-badge/attempt-1/test_adding_a_product_updates_the_cart_badge.py",
+            "pytest": "adding-a-product-updates-the-cart-badge/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "adding-a-product-updates-the-cart-badge/attempt-1/test_adding_a_product_updates_the_cart_badge.py",
+      "duration_s": 29.56
+    },
+    {
+      "story": {
+        "id": "removing-a-product-from-the-cart-page-empties-the-cart",
+        "title": "Removing a product from the cart page empties the cart",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "Given I have added \"Sauce Labs Bike Light\" to the cart",
+          "When I open the cart",
+          "And I remove \"Sauce Labs Bike Light\"",
+          "Then the cart contains no items",
+          "And the cart badge is not displayed"
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:38:23.544925Z",
+          "llm": {
+            "latency_s": 29.692,
+            "prompt_tokens": 4347,
+            "completion_tokens": 209,
+            "retries": 0,
+            "prompt_chars": 17085,
+            "response_chars": 829
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.56,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have count '0'",
+            "failure_detail": "Failing line (test_removing_a_product_from_the_cart_page_empties_the_cart.py:20): expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nAssertionError: Locator expected to have count '0'\nActual value: 1\nCall log:\n- Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\n- waiting for get_by_test_id(\"cart-contents-container\")\n14 × locator resolved to 1 element\n- unexpected value \"1\"",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n____ test_removing_a_product_from_the_cart_page_empties_the_cart[chromium] ____\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_removing_a_product_from_the_cart_page_empties_the_cart(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-bike-light\").click()\n        page.get_by_test_id(\"shopping-cart-link\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).to_have_text(\"1\")\n        page.get_by_test_id(\"remove-sauce-labs-bike-light\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).not_to_be_visible()\n>       expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nE       AssertionError: Locator expected to have count '0'\nE       Actual value: 1 \nE       Call log:\nE         - Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"cart-contents-container\")\nE           14 × locator resolved to 1 element\nE              - unexpected value \"1\"\n\nremoving-a-product-from-the-cart-page-empties-the-cart\\attempt-1\\test_removing_a_product_from_the_cart_page_empties_the_cart.py:20: AssertionError\n1 failed in 7.43s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have count '0'",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/prompt.md",
+            "response": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/response.md",
+            "code": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/test_removing_a_product_from_the_cart_page_empties_the_cart.py",
+            "pytest": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:39:01.969105Z",
+          "llm": {
+            "latency_s": 34.272,
+            "prompt_tokens": 4755,
+            "completion_tokens": 209,
+            "retries": 0,
+            "prompt_chars": 18738,
+            "response_chars": 829
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.23,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have count '0'",
+            "failure_detail": "Failing line (test_removing_a_product_from_the_cart_page_empties_the_cart.py:20): expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nAssertionError: Locator expected to have count '0'\nActual value: 1\nCall log:\n- Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\n- waiting for get_by_test_id(\"cart-contents-container\")\n14 × locator resolved to 1 element\n- unexpected value \"1\"",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n____ test_removing_a_product_from_the_cart_page_empties_the_cart[chromium] ____\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_removing_a_product_from_the_cart_page_empties_the_cart(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-bike-light\").click()\n        page.get_by_test_id(\"shopping-cart-link\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).to_have_text(\"1\")\n        page.get_by_test_id(\"remove-sauce-labs-bike-light\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).not_to_be_visible()\n>       expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nE       AssertionError: Locator expected to have count '0'\nE       Actual value: 1 \nE       Call log:\nE         - Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"cart-contents-container\")\nE           14 × locator resolved to 1 element\nE              - unexpected value \"1\"\n\nremoving-a-product-from-the-cart-page-empties-the-cart\\attempt-2\\test_removing_a_product_from_the_cart_page_empties_the_cart.py:20: AssertionError\n1 failed in 7.02s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have count '0'",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-2/prompt.md",
+            "response": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-2/response.md",
+            "code": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-2/test_removing_a_product_from_the_cart_page_empties_the_cart.py",
+            "pytest": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:39:44.640473Z",
+          "llm": {
+            "latency_s": 36.06,
+            "prompt_tokens": 5163,
+            "completion_tokens": 209,
+            "retries": 0,
+            "prompt_chars": 20391,
+            "response_chars": 829
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 8.45,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have count '0'",
+            "failure_detail": "Failing line (test_removing_a_product_from_the_cart_page_empties_the_cart.py:20): expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nAssertionError: Locator expected to have count '0'\nActual value: 1\nCall log:\n- Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\n- waiting for get_by_test_id(\"cart-contents-container\")\n14 × locator resolved to 1 element\n- unexpected value \"1\"",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n____ test_removing_a_product_from_the_cart_page_empties_the_cart[chromium] ____\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_removing_a_product_from_the_cart_page_empties_the_cart(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-bike-light\").click()\n        page.get_by_test_id(\"shopping-cart-link\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).to_have_text(\"1\")\n        page.get_by_test_id(\"remove-sauce-labs-bike-light\").click()\n    \n        expect(page.get_by_test_id(\"shopping-cart-badge\")).not_to_be_visible()\n>       expect(page.get_by_test_id(\"cart-contents-container\")).to_have_count(0)\nE       AssertionError: Locator expected to have count '0'\nE       Actual value: 1 \nE       Call log:\nE         - Expect \"to_have_count\" get_by_test_id(\"cart-contents-container\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"cart-contents-container\")\nE           14 × locator resolved to 1 element\nE              - unexpected value \"1\"\n\nremoving-a-product-from-the-cart-page-empties-the-cart\\attempt-3\\test_removing_a_product_from_the_cart_page_empties_the_cart.py:20: AssertionError\n1 failed in 7.28s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have count '0'",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-3/prompt.md",
+            "response": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-3/response.md",
+            "code": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-3/test_removing_a_product_from_the_cart_page_empties_the_cart.py",
+            "pytest": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 125.77
+    },
+    {
+      "story": {
+        "id": "the-cart-lists-every-product-that-was-added",
+        "title": "The cart lists every product that was added",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\" to the cart",
+          "And I open the cart",
+          "Then the cart lists exactly 2 items",
+          "And the cart shows \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:40:29.318458Z",
+          "llm": {
+            "latency_s": 34.041,
+            "prompt_tokens": 4347,
+            "completion_tokens": 237,
+            "retries": 0,
+            "prompt_chars": 17070,
+            "response_chars": 906
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 7.99,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Backpack'",
+            "failure_detail": "Failing line (test_the_cart_lists_every_product_that_was_added.py:21): expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\")\nAssertionError: Locator expected to have text 'Sauce Labs Backpack'\nActual value: 1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\nCall log:\n- Expect \"to_have_text\" get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first with timeout 5000ms\n- waiting for get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first\n14 × locator resolved to <div class=\"cart_item\" data-test=\"inventory-item\">…</div>\n- unexpected value \"1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\"\n\nAria snapshot:\n- text: \"1\"\n- button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\n- text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\n- button \"Remove\"",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_________ test_the_cart_lists_every_product_that_was_added[chromium] __________\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_the_cart_lists_every_product_that_was_added(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\").click()\n        page.get_by_test_id(\"add-to-cart-sauce-labs-onesie\").click()\n    \n        page.get_by_test_id(\"shopping-cart-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/cart\\.html$\"))\n    \n        cart_items = page.get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\")\n        expect(cart_items).to_have_count(2)\n>       expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\")\nE       AssertionError: Locator expected to have text 'Sauce Labs Backpack'\nE       Actual value: 1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove \nE       Call log:\nE         - Expect \"to_have_text\" get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first with timeout 5000ms\nE         - waiting for get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first\nE           14 × locator resolved to <div class=\"cart_item\" data-test=\"inventory-item\">…</div>\nE              - unexpected value \"1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\"\nE       \nE       Aria snapshot:\nE       - text: \"1\"\nE       - button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\nE       - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\nE       - button \"Remove\"\n\nthe-cart-lists-every-product-that-was-added\\attempt-1\\test_the_cart_lists_every_product_that_was_added.py:21: AssertionError\n1 failed in 6.87s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Backpack'",
+          "artifacts": {
+            "prompt": "the-cart-lists-every-product-that-was-added/attempt-1/prompt.md",
+            "response": "the-cart-lists-every-product-that-was-added/attempt-1/response.md",
+            "code": "the-cart-lists-every-product-that-was-added/attempt-1/test_the_cart_lists_every_product_that_was_added.py",
+            "pytest": "the-cart-lists-every-product-that-was-added/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:41:11.520461Z",
+          "llm": {
+            "latency_s": 42.97,
+            "prompt_tokens": 4951,
+            "completion_tokens": 243,
+            "retries": 0,
+            "prompt_chars": 19488,
+            "response_chars": 930
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 3.6,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "python_error",
+            "failure_message": "TypeError: LocatorAssertions.to_have_text() got an unexpected keyword argument 'exact'",
+            "failure_detail": "Failing line (test_the_cart_lists_every_product_that_was_added.py:21): expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\", exact=True)\nTypeError: LocatorAssertions.to_have_text() got an unexpected keyword argument 'exact'",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_________ test_the_cart_lists_every_product_that_was_added[chromium] __________\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_the_cart_lists_every_product_that_was_added(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\").click()\n        page.get_by_test_id(\"add-to-cart-sauce-labs-onesie\").click()\n    \n        page.get_by_test_id(\"shopping-cart-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/cart\\.html$\"))\n    \n        cart_items = page.get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\")\n        expect(cart_items).to_have_count(2)\n>       expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\", exact=True)\nE       TypeError: LocatorAssertions.to_have_text() got an unexpected keyword argument 'exact'\n\nthe-cart-lists-every-product-that-was-added\\attempt-2\\test_the_cart_lists_every_product_that_was_added.py:21: TypeError\n1 failed in 2.41s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "python_error",
+          "failure_message": "TypeError: LocatorAssertions.to_have_text() got an unexpected keyword argument 'exact'",
+          "artifacts": {
+            "prompt": "the-cart-lists-every-product-that-was-added/attempt-2/prompt.md",
+            "response": "the-cart-lists-every-product-that-was-added/attempt-2/response.md",
+            "code": "the-cart-lists-every-product-that-was-added/attempt-2/test_the_cart_lists_every_product_that_was_added.py",
+            "pytest": "the-cart-lists-every-product-that-was-added/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:41:58.248982Z",
+          "llm": {
+            "latency_s": 38.548,
+            "prompt_tokens": 5331,
+            "completion_tokens": 237,
+            "retries": 0,
+            "prompt_chars": 21038,
+            "response_chars": 906
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 9.19,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "assertion_failed",
+            "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Backpack'",
+            "failure_detail": "Failing line (test_the_cart_lists_every_product_that_was_added.py:21): expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\")\nAssertionError: Locator expected to have text 'Sauce Labs Backpack'\nActual value: 1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\nCall log:\n- Expect \"to_have_text\" get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first with timeout 5000ms\n- waiting for get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first\n14 × locator resolved to <div class=\"cart_item\" data-test=\"inventory-item\">…</div>\n- unexpected value \"1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\"\n\nAria snapshot:\n- text: \"1\"\n- button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\n- text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\n- button \"Remove\"",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n_________ test_the_cart_lists_every_product_that_was_added[chromium] __________\n\npage = <Page url='https://www.saucedemo.com/cart.html'>\n\n    def test_the_cart_lists_every_product_that_was_added(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"add-to-cart-sauce-labs-backpack\").click()\n        page.get_by_test_id(\"add-to-cart-sauce-labs-onesie\").click()\n    \n        page.get_by_test_id(\"shopping-cart-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/cart\\.html$\"))\n    \n        cart_items = page.get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\")\n        expect(cart_items).to_have_count(2)\n>       expect(cart_items.nth(0)).to_have_text(\"Sauce Labs Backpack\")\nE       AssertionError: Locator expected to have text 'Sauce Labs Backpack'\nE       Actual value: 1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove \nE       Call log:\nE         - Expect \"to_have_text\" get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first with timeout 5000ms\nE         - waiting for get_by_test_id(\"cart-list\").get_by_test_id(\"inventory-item\").first\nE           14 × locator resolved to <div class=\"cart_item\" data-test=\"inventory-item\">…</div>\nE              - unexpected value \"1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove\"\nE       \nE       Aria snapshot:\nE       - text: \"1\"\nE       - button \"View details for Sauce Labs Backpack\": Sauce Labs Backpack\nE       - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99\nE       - button \"Remove\"\n\nthe-cart-lists-every-product-that-was-added\\attempt-3\\test_the_cart_lists_every_product_that_was_added.py:21: AssertionError\n1 failed in 8.01s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "assertion_failed",
+          "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Backpack'",
+          "artifacts": {
+            "prompt": "the-cart-lists-every-product-that-was-added/attempt-3/prompt.md",
+            "response": "the-cart-lists-every-product-that-was-added/attempt-3/response.md",
+            "code": "the-cart-lists-every-product-that-was-added/attempt-3/test_the_cart_lists_every_product_that_was_added.py",
+            "pytest": "the-cart-lists-every-product-that-was-added/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 136.83
+    },
+    {
+      "story": {
+        "id": "sorting-by-price-from-low-to-high",
+        "title": "Sorting by price from low to high",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I sort the products by \"Price (low to high)\"",
+          "Then the first product price is \"$7.99\"",
+          "And the last product price is \"$49.99\""
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:42:46.153064Z",
+          "llm": {
+            "latency_s": 24.972,
+            "prompt_tokens": 4333,
+            "completion_tokens": 164,
+            "retries": 0,
+            "prompt_chars": 17003,
+            "response_chars": 633
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 3.04,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.86s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "sorting-by-price-from-low-to-high/attempt-1/prompt.md",
+            "response": "sorting-by-price-from-low-to-high/attempt-1/response.md",
+            "code": "sorting-by-price-from-low-to-high/attempt-1/test_sorting_by_price_from_low_to_high.py",
+            "pytest": "sorting-by-price-from-low-to-high/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "sorting-by-price-from-low-to-high/attempt-1/test_sorting_by_price_from_low_to_high.py",
+      "duration_s": 28.19
+    },
+    {
+      "story": {
+        "id": "sorting-by-name-from-z-to-a",
+        "title": "Sorting by name from Z to A",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I sort the products by \"Name (Z to A)\"",
+          "Then the first product is \"Test.allTheThings() T-Shirt (Red)\"",
+          "And the last product is \"Sauce Labs Backpack\""
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:43:14.343769Z",
+          "llm": {
+            "latency_s": 23.407,
+            "prompt_tokens": 4335,
+            "completion_tokens": 168,
+            "retries": 0,
+            "prompt_chars": 17014,
+            "response_chars": 676
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 2.74,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 1.61s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "sorting-by-name-from-z-to-a/attempt-1/prompt.md",
+            "response": "sorting-by-name-from-z-to-a/attempt-1/response.md",
+            "code": "sorting-by-name-from-z-to-a/attempt-1/test_sorting_by_name_from_z_to_a.py",
+            "pytest": "sorting-by-name-from-z-to-a/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "sorting-by-name-from-z-to-a/attempt-1/test_sorting_by_name_from_z_to_a.py",
+      "duration_s": 26.31
+    },
+    {
+      "story": {
+        "id": "opening-a-product-detail-page",
+        "title": "Opening a product detail page",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I click the product name \"Sauce Labs Bike Light\"",
+          "Then the detail page shows the name \"Sauce Labs Bike Light\"",
+          "And the detail page shows the price \"$9.99\"",
+          "When I click \"Back to products\"",
+          "Then I am on the inventory page again"
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:43:40.659863Z",
+          "llm": {
+            "latency_s": 28.843,
+            "prompt_tokens": 4349,
+            "completion_tokens": 210,
+            "retries": 0,
+            "prompt_chars": 17098,
+            "response_chars": 812
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 3.05,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "strict_mode_violation",
+            "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Bike Light'",
+            "failure_detail": "Failing line (test_opening_a_product_detail_page.py:16): expect(page.get_by_test_id(\"inventory-item-name\")).to_have_text(\"Sauce Labs Bike Light\")\nAssertionError: Locator expected to have text 'Sauce Labs Bike Light'\nActual value: None\nError: strict mode violation: get_by_test_id(\"inventory-item-name\") resolved to 6 elements:\n1) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Backpack</div> aka get_by_test_id(\"item-4-title-link\")\n2) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Bike Light</div> aka get_by_test_id(\"item-0-title-link\")\n3) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Bolt T-Shirt</div> aka get_by_test_id(\"item-1-title-link\")\n4) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Fleece Jacket</div> aka get_by_test_id(\"item-5-title-link\")\n5) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Onesie</div> aka get_by_test_id(\"item-2-title-link\")\n6) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Test.allTheThings() T-Shirt (Red)</div> aka get_by_test_id(\"item-3-title-link\")\n\nCall log:\n- Expect \"to_have_text\" get_by_test_id(\"inventory-item-name\") with timeout 5000ms\n- waiting for get_by_test_id(\"inventory-item-name\")",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n________________ test_opening_a_product_detail_page[chromium] _________________\n\npage = <Page url='https://www.saucedemo.com/inventory-item.html?id=0'>\n\n    def test_opening_a_product_detail_page(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"item-0-title-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory-item\\.html\\?id=0$\"))\n    \n>       expect(page.get_by_test_id(\"inventory-item-name\")).to_have_text(\"Sauce Labs Bike Light\")\nE       AssertionError: Locator expected to have text 'Sauce Labs Bike Light'\nE       Actual value: None\nE       Error: strict mode violation: get_by_test_id(\"inventory-item-name\") resolved to 6 elements:\nE           1) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Backpack</div> aka get_by_test_id(\"item-4-title-link\")\nE           2) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Bike Light</div> aka get_by_test_id(\"item-0-title-link\")\nE           3) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Bolt T-Shirt</div> aka get_by_test_id(\"item-1-title-link\")\nE           4) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Fleece Jacket</div> aka get_by_test_id(\"item-5-title-link\")\nE           5) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Onesie</div> aka get_by_test_id(\"item-2-title-link\")\nE           6) <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Test.allTheThings() T-Shirt (Red)</div> aka get_by_test_id(\"item-3-title-link\")\nE        \nE       Call log:\nE         - Expect \"to_have_text\" get_by_test_id(\"inventory-item-name\") with timeout 5000ms\nE         - waiting for get_by_test_id(\"inventory-item-name\")\n\nopening-a-product-detail-page\\attempt-1\\test_opening_a_product_detail_page.py:16: AssertionError\n1 failed in 1.92s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "strict_mode_violation",
+          "failure_message": "AssertionError: Locator expected to have text 'Sauce Labs Bike Light'",
+          "artifacts": {
+            "prompt": "opening-a-product-detail-page/attempt-1/prompt.md",
+            "response": "opening-a-product-detail-page/attempt-1/response.md",
+            "code": "opening-a-product-detail-page/attempt-1/test_opening_a_product_detail_page.py",
+            "pytest": "opening-a-product-detail-page/attempt-1/pytest.txt"
+          }
+        },
+        {
+          "number": 2,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:44:12.729665Z",
+          "llm": {
+            "latency_s": 37.155,
+            "prompt_tokens": 4991,
+            "completion_tokens": 212,
+            "retries": 0,
+            "prompt_chars": 19612,
+            "response_chars": 826
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 3.11,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "python_error",
+            "failure_message": "AttributeError: 'LocatorAssertions' object has no attribute 'first'",
+            "failure_detail": "Failing line (test_opening_a_product_detail_page.py:16): expect(page.get_by_test_id(\"inventory-item-name\")).first().to_have_text(\"Sauce Labs Bike Light\")\nAttributeError: 'LocatorAssertions' object has no attribute 'first'",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n________________ test_opening_a_product_detail_page[chromium] _________________\n\npage = <Page url='https://www.saucedemo.com/inventory-item.html?id=0'>\n\n    def test_opening_a_product_detail_page(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"item-0-title-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory-item\\.html\\?id=0$\"))\n    \n>       expect(page.get_by_test_id(\"inventory-item-name\")).first().to_have_text(\"Sauce Labs Bike Light\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AttributeError: 'LocatorAssertions' object has no attribute 'first'\n\nopening-a-product-detail-page\\attempt-2\\test_opening_a_product_detail_page.py:16: AttributeError\n1 failed in 1.87s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "python_error",
+          "failure_message": "AttributeError: 'LocatorAssertions' object has no attribute 'first'",
+          "artifacts": {
+            "prompt": "opening-a-product-detail-page/attempt-2/prompt.md",
+            "response": "opening-a-product-detail-page/attempt-2/response.md",
+            "code": "opening-a-product-detail-page/attempt-2/test_opening_a_product_detail_page.py",
+            "pytest": "opening-a-product-detail-page/attempt-2/pytest.txt"
+          }
+        },
+        {
+          "number": 3,
+          "kind": "repair",
+          "started_at": "2026-11-12T22:44:53.159366Z",
+          "llm": {
+            "latency_s": 35.281,
+            "prompt_tokens": 5339,
+            "completion_tokens": 212,
+            "retries": 0,
+            "prompt_chars": 21048,
+            "response_chars": 826
+          },
+          "issues": [],
+          "execution": {
+            "status": "failed",
+            "duration_s": 3.07,
+            "exit_code": 1,
+            "tests_total": 1,
+            "tests_passed": 0,
+            "failure_category": "python_error",
+            "failure_message": "AttributeError: 'LocatorAssertions' object has no attribute 'first'",
+            "failure_detail": "Failing line (test_opening_a_product_detail_page.py:16): expect(page.get_by_test_id(\"inventory-item-name\")).first().to_have_text(\"Sauce Labs Bike Light\")\nAttributeError: 'LocatorAssertions' object has no attribute 'first'",
+            "output_tail": "F                                                                        [100%]\n================================== FAILURES ===================================\n________________ test_opening_a_product_detail_page[chromium] _________________\n\npage = <Page url='https://www.saucedemo.com/inventory-item.html?id=0'>\n\n    def test_opening_a_product_detail_page(page: Page) -> None:\n        page.goto(\"/\")\n        page.get_by_test_id(\"username\").fill(\"standard_user\")\n        page.get_by_test_id(\"password\").fill(\"secret_sauce\")\n        page.get_by_test_id(\"login-button\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory\\.html$\"))\n    \n        page.get_by_test_id(\"item-0-title-link\").click()\n        expect(page).to_have_url(re.compile(r\".*/inventory-item\\.html\\?id=0$\"))\n    \n>       expect(page.get_by_test_id(\"inventory-item-name\")).first().to_have_text(\"Sauce Labs Bike Light\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AttributeError: 'LocatorAssertions' object has no attribute 'first'\n\nopening-a-product-detail-page\\attempt-3\\test_opening_a_product_detail_page.py:16: AttributeError\n1 failed in 1.89s"
+          },
+          "outcome": "execution_failed",
+          "failure_category": "python_error",
+          "failure_message": "AttributeError: 'LocatorAssertions' object has no attribute 'first'",
+          "artifacts": {
+            "prompt": "opening-a-product-detail-page/attempt-3/prompt.md",
+            "response": "opening-a-product-detail-page/attempt-3/response.md",
+            "code": "opening-a-product-detail-page/attempt-3/test_opening_a_product_detail_page.py",
+            "pytest": "opening-a-product-detail-page/attempt-3/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 111.02
+    },
+    {
+      "story": {
+        "id": "complete-a-purchase",
+        "title": "Complete a purchase",
+        "narrative": "As a shopper, I want to pay for the products in my cart so that they are shipped to me.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "And I have added \"Sauce Labs Backpack\" to the cart",
+          "When I go to the cart and click \"Checkout\"",
+          "And I enter first name \"Ada\", last name \"Lovelace\" and postal code \"12345\" and continue",
+          "Then the overview shows \"Item total: $29.99\" and \"Total: $32.39\"",
+          "When I click \"Finish\"",
+          "Then I see the heading \"Thank you for your order!\""
+        ],
+        "source": "examples/stories/04-checkout.md",
+        "format": "markdown",
+        "tags": [
+          "smoke",
+          "checkout"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:45:31.682810Z",
+          "llm": {
+            "latency_s": 51.36,
+            "prompt_tokens": 4385,
+            "completion_tokens": 380,
+            "retries": 0,
+            "prompt_chars": 17150,
+            "response_chars": 1452
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 3.42,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 2.27s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "complete-a-purchase/attempt-1/prompt.md",
+            "response": "complete-a-purchase/attempt-1/response.md",
+            "code": "complete-a-purchase/attempt-1/test_complete_a_purchase.py",
+            "pytest": "complete-a-purchase/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "complete-a-purchase/attempt-1/test_complete_a_purchase.py",
+      "duration_s": 54.94
+    },
+    {
+      "story": {
+        "id": "checkout-requires-a-first-name",
+        "title": "Checkout requires a first name",
+        "narrative": "As the shop owner, I want shipping details to be complete so that orders can be delivered.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "And I have added \"Sauce Labs Onesie\" to the cart",
+          "When I start the checkout and continue without entering a first name",
+          "Then an error message says \"Error: First Name is required\"",
+          "And I am still on the checkout information page"
+        ],
+        "source": "examples/stories/04-checkout.md",
+        "format": "markdown",
+        "tags": [
+          "checkout",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T22:46:26.627683Z",
+          "llm": {
+            "latency_s": 29.534,
+            "prompt_tokens": 4337,
+            "completion_tokens": 210,
+            "retries": 0,
+            "prompt_chars": 17076,
+            "response_chars": 834
+          },
+          "issues": [],
+          "execution": {
+            "status": "passed",
+            "duration_s": 3.3,
+            "exit_code": 0,
+            "tests_total": 1,
+            "tests_passed": 1,
+            "failure_category": null,
+            "failure_message": null,
+            "failure_detail": null,
+            "output_tail": ".                                                                        [100%]\n1 passed in 2.12s"
+          },
+          "outcome": "passed",
+          "failure_category": null,
+          "failure_message": null,
+          "artifacts": {
+            "prompt": "checkout-requires-a-first-name/attempt-1/prompt.md",
+            "response": "checkout-requires-a-first-name/attempt-1/response.md",
+            "code": "checkout-requires-a-first-name/attempt-1/test_checkout_requires_a_first_name.py",
+            "pytest": "checkout-requires-a-first-name/attempt-1/pytest.txt"
+          }
+        }
+      ],
+      "final_status": "passed_first_attempt",
+      "final_test": "checkout-requires-a-first-name/attempt-1/test_checkout_requires_a_first_name.py",
+      "duration_s": 33.02
+    }
+  ]
+}

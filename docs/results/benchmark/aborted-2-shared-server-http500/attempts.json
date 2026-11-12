@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "run_id": "qwen3-8b-think-off",
+    "mode": "run",
+    "started_at": "2026-11-12T21:03:06.711792Z",
+    "finished_at": "2026-11-12T21:11:10.900074Z",
+    "provider": "ollama",
+    "model": "qwen3:8b",
+    "options": {
+      "host": "http://localhost:11434",
+      "num_ctx": 16384,
+      "think": false,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "seed": 42
+    },
+    "base_url": "https://www.saucedemo.com",
+    "max_repairs": 2,
+    "prompt_version": "2026-11-12.1",
+    "catalog_sha256": "f9e45271cc786af74f0ada3e804f24d193b4f526f1ef9e1f84f2f589ec40abd5",
+    "versions": {
+      "python": "3.12.10",
+      "llm-test-generator": "0.1.0",
+      "playwright": "1.65.1",
+      "pytest-playwright": "0.10.0",
+      "pytest": "9.2.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "results": [
+    {
+      "story": {
+        "id": "successful-login",
+        "title": "Successful login",
+        "narrative": "As a registered shopper, I want to log in with my username and password so that I can browse the products.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"secret_sauce\"",
+          "Then I am taken to the inventory page (URL ends with /inventory.html)",
+          "And the page title reads \"Products\"",
+          "And exactly 6 products are listed"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "smoke",
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:03:06.785775Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "successful-login/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 63.75
+    },
+    {
+      "story": {
+        "id": "locked-out-user-is-rejected",
+        "title": "Locked-out user is rejected",
+        "narrative": "As the shop owner, I want locked accounts to be refused so that blocked users cannot place orders.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"locked_out_user\" with password \"secret_sauce\"",
+          "Then I stay on the login page",
+          "And an error message says \"Epic sadface: Sorry, this user has been locked out.\""
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:04:10.542799Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "locked-out-user-is-rejected/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.81
+    },
+    {
+      "story": {
+        "id": "wrong-password-is-rejected",
+        "title": "Wrong password is rejected",
+        "narrative": "As a shopper, I want a clear message when my credentials are wrong so that I know to retry.",
+        "criteria": [
+          "Given I am on the login page",
+          "When I log in as \"standard_user\" with password \"not_the_password\"",
+          "Then an error message says \"Epic sadface: Username and password do not match any user in this service\"",
+          "And the username and password fields are still visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:04:49.351206Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "wrong-password-is-rejected/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 37.87
+    },
+    {
+      "story": {
+        "id": "logout-from-the-menu",
+        "title": "Logout from the menu",
+        "narrative": "As a logged-in shopper, I want to log out so that the next person on this computer cannot use my session.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\"",
+          "When I open the menu and choose \"Logout\"",
+          "Then I am back on the login page",
+          "And the login button is visible"
+        ],
+        "source": "examples/stories/01-authentication.md",
+        "format": "markdown",
+        "tags": [
+          "auth"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:05:27.226906Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "logout-from-the-menu/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 37.94
+    },
+    {
+      "story": {
+        "id": "adding-a-product-updates-the-cart-badge",
+        "title": "Adding a product updates the cart badge",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" to the cart from the inventory page",
+          "Then the cart badge shows \"1\"",
+          "And the backpack's button now reads \"Remove\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart",
+          "smoke"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:06:05.165889Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "adding-a-product-updates-the-cart-badge/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 37.99
+    },
+    {
+      "story": {
+        "id": "removing-a-product-from-the-cart-page-empties-the-cart",
+        "title": "Removing a product from the cart page empties the cart",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "Given I have added \"Sauce Labs Bike Light\" to the cart",
+          "When I open the cart",
+          "And I remove \"Sauce Labs Bike Light\"",
+          "Then the cart contains no items",
+          "And the cart badge is not displayed"
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:06:43.157269Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "removing-a-product-from-the-cart-page-empties-the-cart/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.64
+    },
+    {
+      "story": {
+        "id": "the-cart-lists-every-product-that-was-added",
+        "title": "The cart lists every product that was added",
+        "narrative": "Feature: Shopping cart As a shopper I want to collect products in a cart before checking out.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I add \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\" to the cart",
+          "And I open the cart",
+          "Then the cart lists exactly 2 items",
+          "And the cart shows \"Sauce Labs Backpack\" and \"Sauce Labs Onesie\""
+        ],
+        "source": "examples/stories/02-cart.feature",
+        "format": "gherkin",
+        "tags": [
+          "cart"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:07:21.799769Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "the-cart-lists-every-product-that-was-added/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.57
+    },
+    {
+      "story": {
+        "id": "sorting-by-price-from-low-to-high",
+        "title": "Sorting by price from low to high",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I sort the products by \"Price (low to high)\"",
+          "Then the first product price is \"$7.99\"",
+          "And the last product price is \"$49.99\""
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:08:00.366681Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "sorting-by-price-from-low-to-high/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.12
+    },
+    {
+      "story": {
+        "id": "sorting-by-name-from-z-to-a",
+        "title": "Sorting by name from Z to A",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I sort the products by \"Name (Z to A)\"",
+          "Then the first product is \"Test.allTheThings() T-Shirt (Red)\"",
+          "And the last product is \"Sauce Labs Backpack\""
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:08:38.485630Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "sorting-by-name-from-z-to-a/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.02
+    },
+    {
+      "story": {
+        "id": "opening-a-product-detail-page",
+        "title": "Opening a product detail page",
+        "narrative": "Feature: Product catalog As a shopper I want to sort and inspect products so that I find what I need quickly.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "When I click the product name \"Sauce Labs Bike Light\"",
+          "Then the detail page shows the name \"Sauce Labs Bike Light\"",
+          "And the detail page shows the price \"$9.99\"",
+          "When I click \"Back to products\"",
+          "Then I am on the inventory page again"
+        ],
+        "source": "examples/stories/03-catalog.feature",
+        "format": "gherkin",
+        "tags": [
+          "catalog"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:09:16.511858Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "opening-a-product-detail-page/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.08
+    },
+    {
+      "story": {
+        "id": "complete-a-purchase",
+        "title": "Complete a purchase",
+        "narrative": "As a shopper, I want to pay for the products in my cart so that they are shipped to me.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "And I have added \"Sauce Labs Backpack\" to the cart",
+          "When I go to the cart and click \"Checkout\"",
+          "And I enter first name \"Ada\", last name \"Lovelace\" and postal code \"12345\" and continue",
+          "Then the overview shows \"Item total: $29.99\" and \"Total: $32.39\"",
+          "When I click \"Finish\"",
+          "Then I see the heading \"Thank you for your order!\""
+        ],
+        "source": "examples/stories/04-checkout.md",
+        "format": "markdown",
+        "tags": [
+          "smoke",
+          "checkout"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:09:54.595975Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "complete-a-purchase/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 38.36
+    },
+    {
+      "story": {
+        "id": "checkout-requires-a-first-name",
+        "title": "Checkout requires a first name",
+        "narrative": "As the shop owner, I want shipping details to be complete so that orders can be delivered.",
+        "criteria": [
+          "Given I am logged in as \"standard_user\" with password \"secret_sauce\"",
+          "And I have added \"Sauce Labs Onesie\" to the cart",
+          "When I start the checkout and continue without entering a first name",
+          "Then an error message says \"Error: First Name is required\"",
+          "And I am still on the checkout information page"
+        ],
+        "source": "examples/stories/04-checkout.md",
+        "format": "markdown",
+        "tags": [
+          "checkout",
+          "negative"
+        ]
+      },
+      "attempts": [
+        {
+          "number": 1,
+          "kind": "generate",
+          "started_at": "2026-11-12T21:10:32.955584Z",
+          "llm": null,
+          "issues": [],
+          "execution": null,
+          "outcome": "provider_error",
+          "failure_category": "provider_error",
+          "failure_message": "ollama failed after 3 attempts: ollama HTTP 500: {\"error\":\"prediction aborted, token repeat limit reached\"}",
+          "artifacts": {
+            "prompt": "checkout-requires-a-first-name/attempt-1/prompt.md"
+          }
+        }
+      ],
+      "final_status": "failed",
+      "final_test": null,
+      "duration_s": 37.94
+    }
+  ]
+}

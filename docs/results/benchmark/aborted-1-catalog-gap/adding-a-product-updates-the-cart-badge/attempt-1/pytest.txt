@@ -1,0 +1,68 @@
+art-sauce-labs-backpack").click()
+        expect(page.get_by_test_id("shopping-cart-badge")).to_have_text("1")
+>       expect(page.get_by_test_id("add-to-cart-sauce-labs-backpack")).to_have_text("Remove")
+E       AssertionError: Locator expected to have text 'Remove'
+E       Actual value: None
+E       Error: element(s) not found 
+E       Call log:
+E         - Expect "to_have_text" get_by_test_id("add-to-cart-sauce-labs-backpack") with timeout 5000ms
+E         - waiting for get_by_test_id("add-to-cart-sauce-labs-backpack")
+E       
+E       Aria snapshot:
+E       - banner:
+E         - button "Open Menu"
+E         - img "Open Menu"
+E         - text: Swag Labs
+E         - button "Cart, 1 items": "1"
+E         - text: Products Name (A to Z)
+E         - combobox "Sort products":
+E           - option "Name (A to Z)" [selected]
+E           - option "Name (Z to A)"
+E           - option "Price (low to high)"
+E           - option "Price (high to low)"
+E       - main:
+E         - button "View details for Sauce Labs Backpack":
+E           - img "Sauce Labs Backpack"
+E         - button "View details for Sauce Labs Backpack": Sauce Labs Backpack
+E         - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99
+E         - button "Remove"
+E         - button "View details for Sauce Labs Bike Light":
+E           - img "Sauce Labs Bike Light"
+E         - button "View details for Sauce Labs Bike Light": Sauce Labs Bike Light
+E         - text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Bolt T-Shirt":
+E           - img "Sauce Labs Bolt T-Shirt"
+E         - button "View details for Sauce Labs Bolt T-Shirt": Sauce Labs Bolt T-Shirt
+E         - text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Fleece Jacket":
+E           - img "Sauce Labs Fleece Jacket"
+E         - button "View details for Sauce Labs Fleece Jacket": Sauce Labs Fleece Jacket
+E         - text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Onesie":
+E           - img "Sauce Labs Onesie"
+E         - button "View details for Sauce Labs Onesie": Sauce Labs Onesie
+E         - text: Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel. $7.99
+E         - button "Add to cart"
+E         - button "View details for Test.allTheThings() T-Shirt (Red)":
+E           - img "Test.allTheThings() T-Shirt (Red)"
+E         - button "View details for Test.allTheThings() T-Shirt (Red)": Test.allTheThings() T-Shirt (Red)
+E         - text: This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton. $15.99
+E         - button "Add to cart"
+E       - contentinfo:
+E         - list:
+E           - listitem:
+E             - link "X":
+E               - /url: https://x.com/saucelabs
+E           - listitem:
+E             - link "Facebook":
+E               - /url: https://www.facebook.com/saucelabs
+E           - listitem:
+E             - link "LinkedIn":
+E               - /url: https://www.linkedin.com/company/sauce-labs/
+E         - text: © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy
+
+adding-a-product-updates-the-cart-badge\attempt-1\test_adding_a_product_updates_the_cart_badge.py:14: AssertionError
+1 failed in 6.51s

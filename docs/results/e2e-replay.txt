@@ -1,0 +1,10 @@
+$ uv run pytest -m e2e -k generated --no-cov -v -p no:cacheprovider
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_adding_a_product_updates_the_cart_badge] PASSED [ 12%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_checkout_requires_a_first_name] PASSED [ 25%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_complete_a_purchase] PASSED [ 37%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_locked_out_user_is_rejected] PASSED [ 50%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_sorting_by_name_from_z_to_a] PASSED [ 62%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_sorting_by_price_from_low_to_high] PASSED [ 75%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_successful_login] PASSED [ 87%]
+tests/e2e/test_live_site.py::test_committed_generated_tests_still_pass[test_wrong_password_is_rejected] PASSED [100%]
+====================== 8 passed, 99 deselected in 25.23s ======================

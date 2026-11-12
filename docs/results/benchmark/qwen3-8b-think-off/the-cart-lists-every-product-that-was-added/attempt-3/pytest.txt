@@ -1,0 +1,38 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________ test_the_cart_lists_every_product_that_was_added[chromium] __________
+
+page = <Page url='https://www.saucedemo.com/cart.html'>
+
+    def test_the_cart_lists_every_product_that_was_added(page: Page) -> None:
+        page.goto("/")
+        page.get_by_test_id("username").fill("standard_user")
+        page.get_by_test_id("password").fill("secret_sauce")
+        page.get_by_test_id("login-button").click()
+        expect(page).to_have_url(re.compile(r".*/inventory\.html$"))
+    
+        page.get_by_test_id("add-to-cart-sauce-labs-backpack").click()
+        page.get_by_test_id("add-to-cart-sauce-labs-onesie").click()
+    
+        page.get_by_test_id("shopping-cart-link").click()
+        expect(page).to_have_url(re.compile(r".*/cart\.html$"))
+    
+        cart_items = page.get_by_test_id("cart-list").get_by_test_id("inventory-item")
+        expect(cart_items).to_have_count(2)
+>       expect(cart_items.nth(0)).to_have_text("Sauce Labs Backpack")
+E       AssertionError: Locator expected to have text 'Sauce Labs Backpack'
+E       Actual value: 1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove 
+E       Call log:
+E         - Expect "to_have_text" get_by_test_id("cart-list").get_by_test_id("inventory-item").first with timeout 5000ms
+E         - waiting for get_by_test_id("cart-list").get_by_test_id("inventory-item").first
+E           14 × locator resolved to <div class="cart_item" data-test="inventory-item">…</div>
+E              - unexpected value "1Sauce Labs Backpackcarry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.$29.99Remove"
+E       
+E       Aria snapshot:
+E       - text: "1"
+E       - button "View details for Sauce Labs Backpack": Sauce Labs Backpack
+E       - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99
+E       - button "Remove"
+
+the-cart-lists-every-product-that-was-added\attempt-3\test_the_cart_lists_every_product_that_was_added.py:21: AssertionError
+1 failed in 8.01s

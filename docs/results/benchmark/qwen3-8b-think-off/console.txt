@@ -1,0 +1,27 @@
+llm-test-generator 0.1.0: 12 stories, ollama qwen3:8b, mode=run, max repairs=2, target https://www.saucedemo.com
+run folder: runs/qwen3-8b-think-off
+[ 1/12] successful-login  #1 generate PASS  (17.7 s LLM, 9.6 s browser)
+[ 2/12] locked-out-user-is-rejected  #1 generate PASS  (19.2 s LLM, 3.0 s browser)
+[ 3/12] wrong-password-is-rejected  #1 generate PASS  (20.6 s LLM, 2.9 s browser)
+[ 4/12] logout-from-the-menu  #1 generate execution_failed assertion_failed: AssertionError: Page URL expected to be 're.compile('.*/login\\.html$')'  (21.0 s LLM, 9.0 s browser)
+[ 4/12] logout-from-the-menu  #2 repair   execution_failed assertion_failed: AssertionError: Page URL expected to be 're.compile('.*/login\\.html$')'  (27.1 s LLM, 9.1 s browser)
+[ 4/12] logout-from-the-menu  #3 repair   execution_failed assertion_failed: AssertionError: Page URL expected to be 're.compile('.*/login\\.html$')'  (27.9 s LLM, 9.7 s browser)
+[ 5/12] adding-a-product-updates-the-cart-badge  #1 generate PASS  (26.1 s LLM, 3.2 s browser)
+[ 6/12] removing-a-product-from-the-cart-page-empties-the-cart  #1 generate execution_failed assertion_failed: AssertionError: Locator expected to have count '0'  (29.7 s LLM, 8.6 s browser)
+[ 6/12] removing-a-product-from-the-cart-page-empties-the-cart  #2 repair   execution_failed assertion_failed: AssertionError: Locator expected to have count '0'  (34.3 s LLM, 8.2 s browser)
+[ 6/12] removing-a-product-from-the-cart-page-empties-the-cart  #3 repair   execution_failed assertion_failed: AssertionError: Locator expected to have count '0'  (36.1 s LLM, 8.4 s browser)
+[ 7/12] the-cart-lists-every-product-that-was-added  #1 generate execution_failed assertion_failed: AssertionError: Locator expected to have text 'Sauce Labs Backpack'  (34.0 s LLM, 8.0 s browser)
+[ 7/12] the-cart-lists-every-product-that-was-added  #2 repair   execution_failed python_error: TypeError: LocatorAssertions.to_have_text() got an unexpected keyword argument 'exact'  (43.0 s LLM, 3.6 s browser)
+[ 7/12] the-cart-lists-every-product-that-was-added  #3 repair   execution_failed assertion_failed: AssertionError: Locator expected to have text 'Sauce Labs Backpack'  (38.5 s LLM, 9.2 s browser)
+[ 8/12] sorting-by-price-from-low-to-high  #1 generate PASS  (25.0 s LLM, 3.0 s browser)
+[ 9/12] sorting-by-name-from-z-to-a  #1 generate PASS  (23.4 s LLM, 2.7 s browser)
+[10/12] opening-a-product-detail-page  #1 generate execution_failed strict_mode_violation: AssertionError: Locator expected to have text 'Sauce Labs Bike Light'  (28.8 s LLM, 3.0 s browser)
+[10/12] opening-a-product-detail-page  #2 repair   execution_failed python_error: AttributeError: 'LocatorAssertions' object has no attribute 'first'  (37.2 s LLM, 3.1 s browser)
+[10/12] opening-a-product-detail-page  #3 repair   execution_failed python_error: AttributeError: 'LocatorAssertions' object has no attribute 'first'  (35.3 s LLM, 3.1 s browser)
+[11/12] complete-a-purchase  #1 generate PASS  (51.4 s LLM, 3.4 s browser)
+[12/12] checkout-requires-a-first-name  #1 generate PASS  (29.5 s LLM, 3.3 s browser)
+
+valid on 1st attempt: 8/12 (67 %); after repair 1: 8/12 (67 %); after repair 2: 8/12 (67 %)
+LLM calls: 20, median latency 29.2 s, wall time 12.1 min
+passing tests: runs/qwen3-8b-think-off/passing/
+attempt log:   runs/qwen3-8b-think-off/attempts.json
