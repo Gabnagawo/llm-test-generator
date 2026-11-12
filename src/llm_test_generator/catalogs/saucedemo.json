@@ -1,0 +1,3726 @@
+{
+  "schema_version": 1,
+  "app": "saucedemo",
+  "base_url": "https://www.saucedemo.com",
+  "captured_at": "2026-11-12T20:40:03Z",
+  "captured_with": "playwright 1.65.1 chromium headless",
+  "test_id_attribute": "data-test",
+  "credentials": {
+    "standard_user": "secret_sauce",
+    "locked_out_user": "secret_sauce",
+    "problem_user": "secret_sauce",
+    "performance_glitch_user": "secret_sauce",
+    "error_user": "secret_sauce",
+    "visual_user": "secret_sauce"
+  },
+  "notes": [
+    "Every page except login requires a logged-in session; tests start from a fresh browser context, so log in first (page.goto('/') then fill username/password).",
+    "The cart badge (shopping-cart-badge) is absent when the cart is empty.",
+    "Product sort <select> values: az, za, lohi, hilo.",
+    "Add/remove buttons are per product: add-to-cart-<slug> / remove-<slug>.",
+    "Checkout step one requires first name, last name and postal code.",
+    "The burger menu button has no data-test id: page.get_by_role(\"button\", name=\"Open Menu\").",
+    "Product names and prices repeat per product; narrow with page.get_by_test_id(\"inventory-item\").filter(has_text=\"...\")."
+  ],
+  "pages": [
+    {
+      "name": "login",
+      "path": "/",
+      "state": "logged out",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "login-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "username",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Username",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "password",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "password",
+          "placeholder": "Password",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-button",
+          "tag": "input",
+          "count": 1,
+          "text": "Login",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials",
+          "tag": "div",
+          "count": 1,
+          "text": "standard_user locked_out_user problem_user performance_glitch_user error_user vi",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-password",
+          "tag": "div",
+          "count": 1,
+          "text": "secret_sauce",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "login_error",
+      "path": "/",
+      "state": "after submitting an empty form",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "login-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "username",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Username",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "password",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "password",
+          "placeholder": "Password",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error",
+          "tag": "h3",
+          "count": 1,
+          "text": "Epic sadface: Username is required",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error-button",
+          "tag": "button",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-button",
+          "tag": "input",
+          "count": 1,
+          "text": "Login",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials",
+          "tag": "div",
+          "count": 1,
+          "text": "standard_user locked_out_user problem_user performance_glitch_user error_user vi",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-password",
+          "tag": "div",
+          "count": 1,
+          "text": "secret_sauce",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "login_locked_out",
+      "path": "/",
+      "state": "after logging in as locked_out_user",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "login-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "username",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Username",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "password",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "password",
+          "placeholder": "Password",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error",
+          "tag": "h3",
+          "count": 1,
+          "text": "Epic sadface: Sorry, this user has been locked out.",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error-button",
+          "tag": "button",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-button",
+          "tag": "input",
+          "count": 1,
+          "text": "Login",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials",
+          "tag": "div",
+          "count": 1,
+          "text": "standard_user locked_out_user problem_user performance_glitch_user error_user vi",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-password",
+          "tag": "div",
+          "count": 1,
+          "text": "secret_sauce",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "login_wrong_password",
+      "path": "/",
+      "state": "after logging in with a wrong password",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "login-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "username",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Username",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "password",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "password",
+          "placeholder": "Password",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error",
+          "tag": "h3",
+          "count": 1,
+          "text": "Epic sadface: Username and password do not match any user in this service",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error-button",
+          "tag": "button",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-button",
+          "tag": "input",
+          "count": 1,
+          "text": "Login",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-credentials",
+          "tag": "div",
+          "count": 1,
+          "text": "standard_user locked_out_user problem_user performance_glitch_user error_user vi",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "login-password",
+          "tag": "div",
+          "count": 1,
+          "text": "secret_sauce",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "inventory",
+      "path": "/inventory.html",
+      "state": "logged in as standard_user, empty cart",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Products",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "active-option",
+          "tag": "span",
+          "count": 1,
+          "text": "Name (A to Z)",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "product-sort-container",
+          "tag": "select",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [
+            "az",
+            "za",
+            "lohi",
+            "hilo"
+          ],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-list",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-backpack-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-description",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 6,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "Sauce Labs Backpack",
+            "Sauce Labs Bike Light",
+            "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Fleece Jacket",
+            "Sauce Labs Onesie",
+            "Test.allTheThings() T-Shirt (Red)"
+          ]
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 6,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+            "A red light isn't the desired state in testing but it sure helps when riding you",
+            "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Ap",
+            "It's not every day that you come across a midweight quarter-zip fleece jacket ca",
+            "Rib snap infant onesie for the junior automation engineer in development. Reinfo",
+            "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keybo"
+          ]
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 6,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "$29.99",
+            "$9.99",
+            "$15.99",
+            "$49.99",
+            "$7.99"
+          ]
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-backpack",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bike-light-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bike-light",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bolt-t-shirt-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bolt-t-shirt",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-fleece-jacket-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-fleece-jacket",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-onesie-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-onesie",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-test.allthethings()-t-shirt-(red)-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-test.allthethings()-t-shirt-(red)",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "menu",
+      "path": "/inventory.html",
+      "state": "inventory with the burger menu open",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Products",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "active-option",
+          "tag": "span",
+          "count": 1,
+          "text": "Name (A to Z)",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "product-sort-container",
+          "tag": "select",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [
+            "az",
+            "za",
+            "lohi",
+            "hilo"
+          ],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-list",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-backpack-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-description",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 6,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "Sauce Labs Backpack",
+            "Sauce Labs Bike Light",
+            "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Fleece Jacket",
+            "Sauce Labs Onesie",
+            "Test.allTheThings() T-Shirt (Red)"
+          ]
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 6,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+            "A red light isn't the desired state in testing but it sure helps when riding you",
+            "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Ap",
+            "It's not every day that you come across a midweight quarter-zip fleece jacket ca",
+            "Rib snap infant onesie for the junior automation engineer in development. Reinfo",
+            "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keybo"
+          ]
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 6,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "$29.99",
+            "$9.99",
+            "$15.99",
+            "$49.99",
+            "$7.99"
+          ]
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-backpack",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bike-light-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bike-light",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bolt-t-shirt-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bolt-t-shirt",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-fleece-jacket-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-fleece-jacket",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-onesie-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-onesie",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-test.allthethings()-t-shirt-(red)-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-test.allthethings()-t-shirt-(red)",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "inventory_with_cart",
+      "path": "/inventory.html",
+      "state": "after adding the backpack",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Products",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "active-option",
+          "tag": "span",
+          "count": 1,
+          "text": "Name (A to Z)",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "product-sort-container",
+          "tag": "select",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [
+            "az",
+            "za",
+            "lohi",
+            "hilo"
+          ],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-list",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-backpack-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-description",
+          "tag": "div",
+          "count": 6,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 6,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "Sauce Labs Backpack",
+            "Sauce Labs Bike Light",
+            "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Fleece Jacket",
+            "Sauce Labs Onesie",
+            "Test.allTheThings() T-Shirt (Red)"
+          ]
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 6,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+            "A red light isn't the desired state in testing but it sure helps when riding you",
+            "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Ap",
+            "It's not every day that you come across a midweight quarter-zip fleece jacket ca",
+            "Rib snap infant onesie for the junior automation engineer in development. Reinfo",
+            "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keybo"
+          ]
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 6,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": [
+            "$29.99",
+            "$9.99",
+            "$15.99",
+            "$49.99",
+            "$7.99"
+          ]
+        },
+        {
+          "test_id": "remove-sauce-labs-backpack",
+          "tag": "button",
+          "count": 1,
+          "text": "Remove",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bike-light-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-0-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bike-light",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-bolt-t-shirt-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-1-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-bolt-t-shirt",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-fleece-jacket-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-5-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-fleece-jacket",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-sauce-labs-onesie-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-2-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-sauce-labs-onesie",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-img-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-test.allthethings()-t-shirt-(red)-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-3-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "add-to-cart-test.allthethings()-t-shirt-(red)",
+          "tag": "button",
+          "count": 1,
+          "text": "Add to cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "inventory_item",
+      "path": "/inventory-item.html?id=4",
+      "state": "detail page opened from the first product name",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "back-to-products",
+          "tag": "button",
+          "count": 1,
+          "text": "Back to products",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-sauce-labs-backpack-img",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 1,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 1,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 1,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "remove",
+          "tag": "button",
+          "count": 1,
+          "text": "Remove",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "cart",
+      "path": "/cart.html",
+      "state": "cart with the backpack",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Your Cart",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-contents-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-list",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-quantity-label",
+          "tag": "div",
+          "count": 1,
+          "text": "QTY",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-desc-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Description",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-quantity",
+          "tag": "div",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 1,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 1,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 1,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "remove-sauce-labs-backpack",
+          "tag": "button",
+          "count": 1,
+          "text": "Remove",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "continue-shopping",
+          "tag": "button",
+          "count": 1,
+          "text": "Continue Shopping",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "checkout",
+          "tag": "button",
+          "count": 1,
+          "text": "Checkout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "checkout_step_one",
+      "path": "/checkout-step-one.html",
+      "state": "checkout information form",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Checkout: Your Information",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "checkout-info-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "firstName",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "First Name",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "lastName",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Last Name",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "postalCode",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Zip/Postal Code",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cancel",
+          "tag": "button",
+          "count": 1,
+          "text": "Cancel",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "continue",
+          "tag": "input",
+          "count": 1,
+          "text": "Continue",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "checkout_step_one_error",
+      "path": "/checkout-step-one.html",
+      "state": "after continuing with an empty form",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Checkout: Your Information",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "checkout-info-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "firstName",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "First Name",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "lastName",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Last Name",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "postalCode",
+          "tag": "input",
+          "count": 1,
+          "text": "",
+          "input_type": "text",
+          "placeholder": "Zip/Postal Code",
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error",
+          "tag": "h3",
+          "count": 1,
+          "text": "Error: First Name is required",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "error-button",
+          "tag": "button",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cancel",
+          "tag": "button",
+          "count": 1,
+          "text": "Cancel",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "continue",
+          "tag": "input",
+          "count": 1,
+          "text": "Continue",
+          "input_type": "submit",
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "checkout_step_two",
+      "path": "/checkout-step-two.html",
+      "state": "order overview",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-badge",
+          "tag": "span",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Checkout: Overview",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "checkout-summary-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-list",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-quantity-label",
+          "tag": "div",
+          "count": 1,
+          "text": "QTY",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cart-desc-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Description",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-quantity",
+          "tag": "div",
+          "count": 1,
+          "text": "1",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "item-4-title-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-name",
+          "tag": "div",
+          "count": 1,
+          "text": "Sauce Labs Backpack",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-desc",
+          "tag": "div",
+          "count": 1,
+          "text": "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-item-price",
+          "tag": "div",
+          "count": 1,
+          "text": "$29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "payment-info-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Payment Information:",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "payment-info-value",
+          "tag": "div",
+          "count": 1,
+          "text": "SauceCard #31337",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shipping-info-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Shipping Information:",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shipping-info-value",
+          "tag": "div",
+          "count": 1,
+          "text": "Free Pony Express Delivery!",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "total-info-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Price Total",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "subtotal-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Item total: $29.99",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "tax-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Tax: $2.40",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "total-label",
+          "tag": "div",
+          "count": 1,
+          "text": "Total: $32.39",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "cancel",
+          "tag": "button",
+          "count": 1,
+          "text": "Cancel",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "finish",
+          "tag": "button",
+          "count": 1,
+          "text": "Finish",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "checkout_complete",
+      "path": "/checkout-complete.html",
+      "state": "after finishing the order",
+      "title": "Swag Labs",
+      "elements": [
+        {
+          "test_id": "header-container",
+          "tag": "header",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "primary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "open-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "inventory-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "All Items",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "dynamic-catalog-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Dynamic Catalog",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "about-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "About",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "logout-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Logout",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "reset-sidebar-link",
+          "tag": "a",
+          "count": 1,
+          "text": "Reset App State",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "close-menu",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "shopping-cart-link",
+          "tag": "a",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "secondary-header",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "title",
+          "tag": "span",
+          "count": 1,
+          "text": "Checkout: Complete!",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "checkout-complete-container",
+          "tag": "div",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "pony-express",
+          "tag": "img",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "complete-header",
+          "tag": "h2",
+          "count": 1,
+          "text": "Thank you for your order!",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "complete-text",
+          "tag": "div",
+          "count": 1,
+          "text": "Your order has been dispatched, and will arrive just as fast as the pony can get",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "back-to-products",
+          "tag": "button",
+          "count": 1,
+          "text": "Back Home",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "generate-pdf-order",
+          "tag": "button",
+          "count": 1,
+          "text": "Generate PDF order",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer",
+          "tag": "footer",
+          "count": 1,
+          "text": "",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-x",
+          "tag": "a",
+          "count": 1,
+          "text": "X",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-facebook",
+          "tag": "a",
+          "count": 1,
+          "text": "Facebook",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "social-linkedin",
+          "tag": "a",
+          "count": 1,
+          "text": "LinkedIn",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        },
+        {
+          "test_id": "footer-copy",
+          "tag": "div",
+          "count": 1,
+          "text": "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+          "input_type": null,
+          "placeholder": null,
+          "options": [],
+          "samples": []
+        }
+      ]
+    }
+  ]
+}
