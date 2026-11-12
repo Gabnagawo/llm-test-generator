@@ -48,7 +48,9 @@ class Element(BaseModel):
         if self.options:
             parts.append("options=" + ",".join(self.options))
         if self.samples and len(self.samples) > 1:
-            parts.append("distinct texts in page order=" + json.dumps(self.samples, ensure_ascii=False))
+            parts.append(
+                "distinct texts in page order=" + json.dumps(self.samples, ensure_ascii=False)
+            )
         elif self.text:
             parts.append(f"text={self.text!r}")
         return " ".join(parts)
@@ -145,4 +147,5 @@ def load_catalog(name_or_path: str | Path = DEFAULT_CATALOG) -> Catalog:
 def dump_catalog(catalog: Catalog, path: Path) -> None:
     data = json.loads(catalog.model_dump_json())
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    text = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+    path.write_text(text, encoding="utf-8", newline="\n")

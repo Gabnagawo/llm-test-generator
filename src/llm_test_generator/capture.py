@@ -57,7 +57,9 @@ TEXT_LIMIT = 80
 MAX_SAMPLES = 8
 
 
-def normalize_elements(rows: Iterable[Mapping[str, Any]], max_text: int = TEXT_LIMIT) -> list[Element]:
+def normalize_elements(
+    rows: Iterable[Mapping[str, Any]], max_text: int = TEXT_LIMIT
+) -> list[Element]:
     """Merge raw DOM rows into catalog elements: one per test id, with a count.
 
     Rows for invisible elements are kept (a closed menu is still addressable once
