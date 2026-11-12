@@ -113,7 +113,7 @@ def trim_detail(text: str, limit: int = MAX_DETAIL_CHARS) -> str:
 
 def _first_line(text: str) -> str:
     for line in text.splitlines():
-        stripped = line.strip().removeprefix("E").strip()
+        stripped = re.sub(r"^E\s+", "", line.strip()).strip()
         if stripped:
             return stripped[:300]
     return ""
@@ -148,6 +148,8 @@ def run_test(
     headed: bool = False,
 ) -> ExecutionResult:
     """Execute ``test_file`` (which must live under ``run_dir``) and classify the result."""
+    # pytest runs with cwd=run_dir, so relative paths would be resolved twice.
+    test_file, run_dir = test_file.resolve(), run_dir.resolve()
     junit = test_file.with_suffix(".junit.xml")
     cmd = [
         sys.executable,
