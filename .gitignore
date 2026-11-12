@@ -1,0 +1,44 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Local pipeline runs (benchmark evidence is copied to docs/results/ on purpose)
+runs/
+
+# Playwright artifacts
+test-results/
+playwright-report/
+*.trace.zip
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

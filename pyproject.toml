@@ -1,0 +1,98 @@
+[project]
+name = "llm-test-generator"
+version = "0.1.0"
+description = "Turns user stories and Gherkin scenarios into executed, self-corrected Playwright (Python) tests using a local or hosted LLM."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Gabriel Nagawo", email = "gabrielnagawo12@gmail.com" }]
+keywords = ["llm", "test-generation", "playwright", "pytest", "qa", "sdet", "ollama", "gherkin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.27",
+    "playwright>=1.49",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "pytest>=8.2",
+    "pytest-playwright>=0.6",
+    "rich>=13.7",
+    "ruff>=0.6",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+openai = ["openai>=1.50"]
+
+[project.scripts]
+ltg = "llm_test_generator.cli:app"
+
+[project.urls]
+Repository = "https://github.com/Gabnagawo/llm-test-generator"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.11",
+    "pytest-cov>=5.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_test_generator"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Raw benchmark evidence (LLM output exactly as executed) is data, not source.
+extend-exclude = ["docs/results"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "PT", "RUF", "N", "PTH"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["N802"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "-m",
+    "not e2e and not live",
+    "--cov=llm_test_generator",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-fail-under=80",
+]
+markers = [
+    "e2e: needs a Chromium browser and network access to the demo app (deselected by default)",
+    "live: needs a running LLM backend such as Ollama (deselected by default)",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["llm_test_generator"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+strict = true
+plugins = ["pydantic.mypy"]
