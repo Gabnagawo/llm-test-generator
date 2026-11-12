@@ -28,8 +28,11 @@ class Settings(BaseSettings):
 
     ollama_host: str = Field(default="http://localhost:11434", alias="OLLAMA_HOST")
     # qwen3 needs room for the catalog, the story, the previous attempt and its error.
+    # Keep the same value as other clients of a shared server: a different num_ctx
+    # makes Ollama reload the model.
     ollama_num_ctx: int = Field(default=16384, ge=2048, alias="OLLAMA_NUM_CTX")
     ollama_think: bool = Field(default=False, alias="OLLAMA_THINK")
+    ollama_presence_penalty: float = Field(default=1.5, ge=0, le=2, alias="OLLAMA_PRESENCE_PENALTY")
 
     anthropic_api_key: SecretStr | None = Field(default=None, alias="ANTHROPIC_API_KEY")
     openai_api_key: SecretStr | None = Field(default=None, alias="OPENAI_API_KEY")

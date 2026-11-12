@@ -50,6 +50,7 @@ class OllamaProvider:
         *,
         num_ctx: int = 16384,
         think: bool = False,
+        presence_penalty: float = 1.5,
         temperature: float | None = None,
         seed: int | None = None,
         timeout_s: float = 300.0,
@@ -65,6 +66,9 @@ class OllamaProvider:
         # top_k=20 and min_p=0 in both. Greedy decoding makes it loop.
         self.temperature = temperature if temperature is not None else (0.6 if think else 0.7)
         self.top_p = 0.95 if think else 0.8
+        # Qwen3 card: presence_penalty in [0, 2] curbs endless repetition in quantized builds
+        # (Ollama aborts those with HTTP 500 'token repeat limit reached').
+        self.presence_penalty = presence_penalty
         self.seed = seed
         self.retries = retries
         self.backoff_s = backoff_s
@@ -78,6 +82,7 @@ class OllamaProvider:
             "temperature": self.temperature,
             "top_p": self.top_p,
             "top_k": 20,
+            "presence_penalty": self.presence_penalty,
             "seed": self.seed,
         }
 
@@ -91,6 +96,7 @@ class OllamaProvider:
                 "top_p": self.top_p,
                 "top_k": 20,
                 "min_p": 0,
+                "presence_penalty": self.presence_penalty,
             }
             if self.seed is not None:
                 # A retry with the same seed would replay the same bad sample.
@@ -266,6 +272,7 @@ def build_provider(settings: Settings, fake_script: Sequence[Script] | None = No
                 settings.ollama_host,
                 num_ctx=settings.ollama_num_ctx,
                 think=settings.ollama_think,
+                presence_penalty=settings.ollama_presence_penalty,
                 temperature=settings.llm_temperature,
                 seed=settings.llm_seed,
                 timeout_s=settings.llm_timeout_s,

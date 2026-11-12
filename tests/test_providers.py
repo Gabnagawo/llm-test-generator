@@ -65,6 +65,7 @@ def test_ollama_success_sends_context_and_sampling() -> None:
         "top_p": 0.8,
         "top_k": 20,
         "min_p": 0,
+        "presence_penalty": 1.5,
         "seed": 7,
     }
     assert sent["messages"][0] == {"role": "system", "content": "be brief"}
