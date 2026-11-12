@@ -56,8 +56,8 @@ packages = ["src/llm_test_generator"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-# Raw benchmark evidence (LLM output exactly as executed) is data, not source.
-extend-exclude = ["docs/results"]
+# Raw benchmark evidence and generated tests (LLM output exactly as executed) are data.
+extend-exclude = ["docs/results", "examples/generated"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "S", "SIM", "C4", "PT", "RUF", "N", "PTH", "TID"]
