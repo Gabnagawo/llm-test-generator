@@ -128,9 +128,13 @@ def parse_junit(path: Path) -> tuple[int, int, str | None]:
     total = failed = skipped = 0
     detail: str | None = None
     for suite in suites:
-        total += int(suite.get("tests", "0"))
-        failed += int(suite.get("failures", "0")) + int(suite.get("errors", "0"))
-        skipped += int(suite.get("skipped", "0"))
+        try:
+            total += int(suite.get("tests", "0"))
+            failed += int(suite.get("failures", "0")) + int(suite.get("errors", "0"))
+            skipped += int(suite.get("skipped", "0"))
+        except ValueError:
+            # A malformed report counts as "nothing passed", never as a crash.
+            return 0, 0, None
         for case in suite.iter("testcase"):
             for tag in ("failure", "error"):
                 node = case.find(tag)

@@ -87,6 +87,8 @@ def test_parse_junit(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     assert parse_junit(junit) == (3, 1, "trace")
+    junit.write_text('<testsuite tests="three" failures="0"/>', encoding="utf-8")
+    assert parse_junit(junit) == (0, 0, None)
 
 
 @pytest.fixture
