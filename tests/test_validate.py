@@ -119,6 +119,53 @@ def test_syntax_error_reports_line(catalog: Catalog) -> None:
             FailureCategory.FORBIDDEN_CONSTRUCT,
         ),
         (
+            GOOD_TEST.replace('page.goto("/")', 'page.goto("//example.com/")'),
+            "external-navigation",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST.replace(
+                'page.goto("/")', 'page.goto("https://www.saucedemo.com.evil.test/")'
+            ),
+            "external-navigation",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST.replace('page.goto("/")', 'page.goto("javascript:alert(1)")'),
+            "external-navigation",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST.replace('page.goto("/")', 'url = "/"\n    page.goto(url)'),
+            "dynamic-navigation",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST + '    pytest.importorskip("os").system("id")\n',
+            "forbidden-call",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST + '    getattr(page, "eva" + "luate")("1")\n',
+            "forbidden-call",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST + '    re.sub.__globals__["__builtins__"]\n',
+            "dunder-access",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST + '    __builtins__["ex" + "ec"]("1")\n',
+            "dunder-access",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
+            GOOD_TEST + '    page.request.get("https://example.com/")\n',
+            "forbidden-attribute",
+            FailureCategory.FORBIDDEN_CONSTRUCT,
+        ),
+        (
             GOOD_TEST.replace('"username"', '"user-name"'),
             "unknown-test-id",
             FailureCategory.UNKNOWN_SELECTOR,

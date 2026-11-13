@@ -3,6 +3,11 @@
 Cheap failures (no code, syntax errors, invented selectors, sleeps, imports of ``os``)
 are caught here in milliseconds and sent back to the LLM with a precise message,
 instead of costing a browser run and a 5-second locator timeout.
+
+This is a quality gate, not a sandbox. It rejects the obvious ways out of the allowlist
+(dunder access, ``getattr``, ``pytest.importorskip``, navigation to another host), but a
+static check of Python cannot be a security boundary: a test that passes it still runs
+with the user's privileges. See "Security" in the README.
 """
 
 from __future__ import annotations
@@ -21,13 +26,33 @@ _DATA_TEST_RE = re.compile(r"""\[data-test\s*[~|^$*]?=\s*["']?([^"'\]]+)["']?\s*
 
 ALLOWED_IMPORTS = frozenset({"playwright.sync_api", "re", "pytest"})
 FORBIDDEN_CALLS = frozenset(
-    {"eval", "exec", "compile", "open", "__import__", "input", "breakpoint"}
+    {
+        "eval",
+        "exec",
+        "compile",
+        "open",
+        "__import__",
+        "input",
+        "breakpoint",
+        "getattr",
+        "setattr",
+        "delattr",
+        "globals",
+        "locals",
+        "vars",
+    }
 )
 FORBIDDEN_METHODS = {
     "wait_for_timeout": "fixed waits make tests slow and flaky; use expect(...) auto-waiting",
     "sleep": "fixed waits make tests slow and flaky; use expect(...) auto-waiting",
     "evaluate": "JavaScript evaluation bypasses what a user can do; use locators",
     "set_test_id_attribute": "the test id attribute is configured by the harness",
+    "importorskip": "imports are limited to the allowlist",
+}
+# Attributes that leave the page under test without a goto: page.request / context.request
+# send HTTP requests to any host.
+FORBIDDEN_ATTRIBUTES = {
+    "request": "API requests bypass the page; drive the app through locators",
 }
 LOCATOR_METHODS = frozenset(
     {"locator", "query_selector", "query_selector_all", "wait_for_selector"}
@@ -36,7 +61,9 @@ LINT_RULES = "E9,F63,F7,F82,F811"
 
 
 def extract_code(text: str) -> str | None:
-    """Return the Python code in an LLM answer: the fenced block, or the bare text if it parses.
+    """Return the Python code in an LLM answer: the fenced block, or bare text with a test.
+
+    Bare text is only checked for ``def test_``; :func:`validate` parses it afterwards.
 
     When several fenced blocks are present the one that defines a test wins.
     """
@@ -85,6 +112,32 @@ class _Visitor(ast.NodeVisitor):
                 node,
             )
 
+    def visit_Name(self, node: ast.Name) -> None:
+        if node.id.startswith("__"):
+            self.add(
+                "dunder-access",
+                FailureCategory.FORBIDDEN_CONSTRUCT,
+                f"{node.id} is not allowed in a generated test",
+                node,
+            )
+
+    def visit_Attribute(self, node: ast.Attribute) -> None:
+        if node.attr.startswith("__"):
+            self.add(
+                "dunder-access",
+                FailureCategory.FORBIDDEN_CONSTRUCT,
+                f".{node.attr} is not allowed in a generated test",
+                node,
+            )
+        elif node.attr in FORBIDDEN_ATTRIBUTES:
+            self.add(
+                "forbidden-attribute",
+                FailureCategory.FORBIDDEN_CONSTRUCT,
+                f".{node.attr} is not allowed: {FORBIDDEN_ATTRIBUTES[node.attr]}",
+                node,
+            )
+        self.generic_visit(node)
+
     def visit_Call(self, node: ast.Call) -> None:
         func = node.func
         if isinstance(func, ast.Name):
@@ -112,10 +165,16 @@ class _Visitor(ast.NodeVisitor):
             )
         elif method == "goto":
             self.goto_calls += 1
-            if (
-                literal
-                and re.match(r"^[a-z]+://", literal)
-                and not literal.startswith(self.base_url.rstrip("/"))
+            if literal is None:
+                self.add(
+                    "dynamic-navigation",
+                    FailureCategory.FORBIDDEN_CONSTRUCT,
+                    "page.goto(...) must take a string literal, so the target can be checked",
+                    node,
+                )
+            elif re.match(r"^(?:[a-z][a-z0-9+.-]*:|//)", literal, flags=re.IGNORECASE) and not (
+                literal == self.base_url.rstrip("/")
+                or literal.startswith(self.base_url.rstrip("/") + "/")
             ):
                 self.add(
                     "external-navigation",
