@@ -1,0 +1,35 @@
+name: Live replay
+
+# Replays the committed LLM-generated tests against the live saucedemo.com and checks
+# the page catalog for drift. It depends on a third-party site, so it is kept out of the
+# CI workflow: a slow or changed demo site must not turn the CI badge red.
+# No LLM here: generation needs Ollama or an API key and runs locally.
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install
+        run: |
+          uv sync --locked
+          uv run playwright install --with-deps chromium
+
+      - name: Generated tests still pass on the live app
+        run: uv run pytest -m e2e tests/e2e/test_live_site.py -k generated --no-cov -v
+
+      - name: Page catalog has not drifted
+        run: uv run pytest -m e2e tests/e2e/test_live_site.py -k drifted --no-cov -v
