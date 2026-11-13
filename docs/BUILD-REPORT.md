@@ -7,7 +7,7 @@ Local commits only: no remote, no push. Tag `v0.1.0` (annotated, local).
 
 ```text
 llm-test-generator/
-├── .github/workflows/ci.yml        ruff + mypy + pytest (cov gate 80) | e2e replay on live site | hadolint
+├── .github/workflows/ci.yml        ruff + mypy + pytest (cov gate 80) | hadolint (live replay: live-replay.yml, weekly)
 ├── Dockerfile                      mcr.microsoft.com/playwright/python:v1.65.1-noble + uv
 ├── Makefile                        install, test, e2e, demo, bench, report, catalog, docker
 ├── CHANGELOG.md  LICENSE  README.md  pyproject.toml  uv.lock  .env.example
@@ -24,9 +24,9 @@ llm-test-generator/
 │   ├── providers.py      Ollama (default), Anthropic, OpenAI (lazy extras), fake
 │   ├── report.py         run summaries and comparison tables
 │   ├── config.py  models.py  __main__.py
-├── tests/                97 unit tests + tests/e2e (live site, live LLM; deselected by default)
+├── tests/                106 unit tests + tests/e2e (live site, live LLM; deselected by default)
 ├── examples/stories/     12 stories: 2 Markdown files, 2 .feature files
-├── examples/generated/   the 8 tests qwen3:8b generated that pass (unedited, replayed in CI)
+├── examples/generated/   the 8 tests qwen3:8b generated that pass (unedited, replayed weekly by live-replay.yml)
 └── docs/
     ├── REPO-META.md      description (115 chars) + 10 topics
     ├── BUILD-REPORT.md   this file
@@ -36,7 +36,7 @@ llm-test-generator/
 
 ## Tests and coverage
 
-- `uv run pytest`: **97 passed**, 3 deselected (e2e / live), **97.59 %** line + branch
+- `uv run pytest`: **106 passed**, 10 deselected (e2e / live), **97.70 %** line + branch
   coverage (gate 80 %). Raw: `docs/results/pytest.txt`.
 - `uv run ruff check .`, `uv run ruff format --check .`: clean. `uv run mypy` (strict): clean,
   14 files. Raw: `docs/results/lint.txt`.
@@ -100,7 +100,9 @@ LLM calls: 20, median latency 29.2 s, wall time 12.1 min
   f-string ids are not checked against it.
 - "Valid" means the test passes. Whether every acceptance criterion is asserted was checked by
   reading the tests, not automatically.
-- saucedemo.com is third-party. The e2e job will flag drift.
+- saucedemo.com is third-party. The scheduled live-replay workflow will flag drift.
+- Generated code runs unsandboxed on the host; the validator is not a security boundary
+  (README, Limitations).
 
 ## Not done
 

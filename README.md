@@ -3,6 +3,7 @@
 Turns user stories and Gherkin scenarios into Playwright (Python) tests with an LLM, runs every test against the live app, and sends failures back to the model with the real error for up to two repairs, logging each attempt so the results can be measured.
 
 [![CI](https://github.com/Gabnagawo/llm-test-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/Gabnagawo/llm-test-generator/actions/workflows/ci.yml)
+[![Live replay](https://github.com/Gabnagawo/llm-test-generator/actions/workflows/live-replay.yml/badge.svg)](https://github.com/Gabnagawo/llm-test-generator/actions/workflows/live-replay.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -70,6 +71,11 @@ This needs [Ollama](https://ollama.com) running locally with `ollama pull qwen3:
 For a hosted model, set `LLM_PROVIDER=anthropic` (or `openai` plus `LLM_MODEL`)
 and the API key in `.env`, after `uv sync --extra anthropic`; see
 [.env.example](.env.example).
+
+> **Generated code runs on your machine, unsandboxed.** `ltg run` executes the Python
+> the model writes with your user's privileges. Read
+> [Security: generated code is not sandboxed](#security-generated-code-is-not-sandboxed)
+> before running stories you did not write.
 
 Windows has no `make`, so every target is also a `uv run` command:
 
@@ -199,8 +205,8 @@ seeing the error:
 
 | Metric | Result | Reproduce |
 |---|---|---|
-| Unit tests | **97 passed** (3 e2e/live tests deselected by default) | `uv run pytest` -> [pytest.txt](docs/results/pytest.txt) |
-| Line + branch coverage | **97.59 %** (CI gate: 80 %) | `uv run pytest` |
+| Unit tests | **106 passed** (10 e2e/live tests deselected by default) | `uv run pytest` -> [pytest.txt](docs/results/pytest.txt) |
+| Line + branch coverage | **97.70 %** (CI gate: 80 %) | `uv run pytest` |
 | Lint / types | ruff check and format clean, mypy `--strict` clean (14 files) | [lint.txt](docs/results/lint.txt) |
 | Page catalog | 15 page states, 99 `data-test` ids; re-capture matches the committed ids | `uv run pytest -m e2e -k drifted --no-cov` |
 | Committed generated tests re-run on the live site | **8/8 passed** (the tests in `examples/generated/`) | `uv run pytest -m e2e -k generated --no-cov` -> [e2e-replay.txt](docs/results/e2e-replay.txt) |
@@ -216,6 +222,29 @@ generations within 2–4 s retries; retries now back off exponentially).
 
 ## Limitations
 
+### Security: generated code is not sandboxed
+
+`ltg run` writes the model's answer to a file and runs it with pytest **on the host,
+with the privileges of the user who started it**. There is no sandbox.
+
+- **The static validator is not a security boundary.** It is a quality gate: it catches
+  invented selectors, sleeps and stray imports before a browser starts. It also rejects
+  the obvious ways around its allowlist (dunder access, `getattr`, `pytest.importorskip`,
+  `page.request`, navigation to another host), but a static check of Python source cannot
+  stop code that is written to get past it. Treat a test that passes validation as
+  untrusted code.
+- **The model's input is not fully under your control.** The prompt contains the story
+  files and text captured from a third-party site (the page catalog). Either can carry
+  instructions that steer the model (prompt injection).
+- **Recommendation:** run generation in a container or a VM with no credentials, no
+  mounted home directory and only the network access the app under test needs. The
+  `Dockerfile` in this repository is a starting point (it runs as a non-root user); the
+  image has not been built or tested yet. Run on the host only with stories you wrote
+  and a target site you trust.
+- `ltg check` and the unit tests only parse generated code and never execute it.
+
+### Other limitations
+
 - **One app, twelve stories, one seed per configuration.** These are honest
   numbers for this setup, not a general measure of model quality, and a rerun
   with another seed will move individual stories. The stories were written
@@ -228,8 +257,10 @@ generations within 2–4 s retries; retries now back off exponentially).
 - **Validity means "passes".** A passing test can still under-test a story. The
   validator requires at least one `expect`, but whether every acceptance
   criterion is asserted is checked by reading the tests, not automatically.
-- **The live site can change.** saucedemo.com is third-party. The e2e job fails
-  when the catalog drifts or a committed test stops passing.
+- **The live site can change.** saucedemo.com is third-party. The replay of the
+  committed tests and the catalog drift check run in a separate scheduled workflow
+  (`live-replay.yml`, its own badge), so the CI badge reflects this repository only
+  and the live-replay badge can turn red when the demo site changes or is slow.
 - The format example in the prompt shows the login pattern (on a story that is
   not in the benchmark), which every story needs; that makes login boilerplate
   easier than it would be zero-shot.

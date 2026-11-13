@@ -33,4 +33,13 @@ All notable changes to this project are documented here. The format follows
 - CI (ruff, mypy, pytest with coverage gate, e2e replay of the generated tests on the live
   site, hadolint), Dockerfile on the Playwright 1.65.1 image and Makefile.
 
+### Changed (before release, from the pre-publication review)
+- The validator also rejects dunder names and attributes, `getattr`/`setattr`/`globals`/`vars`,
+  `pytest.importorskip`, `page.request`, a non-literal `page.goto` target and navigation to
+  `//host`, another scheme or a look-alike host. The 39 stored generated tests validate as
+  before. The README states that generated code runs unsandboxed and that the validator
+  is not a security boundary.
+- The live-site replay moved from the CI workflow to a weekly `live-replay.yml` workflow.
+- A malformed JUnit report is reported as "no result" instead of raising.
+
 [0.1.0]: https://github.com/Gabnagawo/llm-test-generator/releases/tag/v0.1.0
